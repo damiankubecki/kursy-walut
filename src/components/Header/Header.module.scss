@@ -1,0 +1,10 @@
+@import './../../assets/variables.scss';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 50px;
+  background-color: $lightBlackColor;
+  box-shadow: 0px 5px 25px 3px $goldColor;
+  z-index: 1;
+}

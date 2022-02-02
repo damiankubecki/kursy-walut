@@ -1,0 +1,19 @@
+$goldColor: #b29700;
+$darkBlackColor: rgb(32, 31, 31);
+$lightBlackColor: rgb(49, 45, 45);
+$whiteColor: #ccc;
+$facebookColor: #3b5998;
+$githubColor: #fafafa;
+$linkedInColor: #0e76a8;
+$borderRadius: 15px;
+
+:export {
+  goldColor: $goldColor;
+  darkBlackColor: $darkBlackColor;
+  lightBlackColor: $lightBlackColor;
+  whiteColor: $whiteColor;
+  facebookColor: $facebookColor;
+  githubColor: $githubColor;
+  linkedInColor: $linkedInColor;
+  borderRadius: $borderRadius;
+}
