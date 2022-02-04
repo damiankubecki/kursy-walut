@@ -1,17 +1,10 @@
 import React from 'react'
-import { css } from '@emotion/react'
-import Loader from 'react-spinners/PulseLoader'
 import { BrowserRouter } from 'react-router-dom'
 import Header from './components/Header/Header'
 import Main from './components/Main/Main'
 import Footer from './components/Footer/Footer'
+import Loader from './components/Loader/Loader'
 import AppContext from './context'
-
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-`
 
 class App extends React.Component {
   state = {
@@ -25,14 +18,18 @@ class App extends React.Component {
   }
 
   render() {
+    const context = {
+      ...this.state,
+      setLoading: this.setLoading,
+    }
     return (
       <BrowserRouter>
-        <AppContext.Provider value={this.state}>
+        <AppContext.Provider value={context}>
           <div className="App">
             <Header />
             <Main setLoading={this.setLoading} />
             <Footer />
-            <Loader color={'red'} loading={this.state.loading} css={override} size={20} />
+            <Loader active={this.state.loading} />
           </div>
         </AppContext.Provider>
       </BrowserRouter>

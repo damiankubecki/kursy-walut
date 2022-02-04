@@ -7,19 +7,19 @@ import SearchView from './Views/SearchView/SearchView'
 import CalculatorView from './Views/CalculatorView/CalculatorView'
 import CuriositesView from './Views/CuriositesView/CuriositesView'
 import InfoView from './Views/InfoView/InfoView'
-import MainContext from './context'
 
 class Main extends React.Component {
   state = {
     currencies: {},
-    title: 'Title',
   }
 
   componentDidMount() {
     data
       .getLastRatesOfAllCurrecies()
       .then(response => {
-        this.props.setLoading(false)
+        setTimeout(() => {
+          this.props.setLoading(false)
+        }, 300)
         this.setState({
           currencies: response,
         })
@@ -27,26 +27,17 @@ class Main extends React.Component {
       .catch(err => console.log(err, 'nie udalo sie pobrac'))
   }
 
-  changeTitle = newTitle => this.setState({ title: newTitle })
-
   render() {
-    const context = {
-      ...this.state,
-      changeTitle: this.changeTitle,
-    }
     return (
-      <MainContext.Provider value={context}>
-        <div className={styles.wrapper}>
-          <h2 className={styles.title}> {this.state.title}</h2>
-          <Routes>
-            <Route exact path="/" element={<DefaultView />} />
-            <Route exact path="/search" element={<SearchView />} />
-            <Route path="/calculator" element={<CalculatorView />} />
-            <Route path="/curiosites" element={<CuriositesView />} />
-            <Route path="/info" element={<InfoView />} />
-          </Routes>
-        </div>
-      </MainContext.Provider>
+      <div className={styles.wrapper}>
+        <Routes>
+          <Route exact path="/" element={<DefaultView />} />
+          <Route exact path="/search" element={<SearchView />} />
+          <Route path="/calculator" element={<CalculatorView />} />
+          <Route path="/curiosites" element={<CuriositesView />} />
+          <Route path="/info" element={<InfoView />} />
+        </Routes>
+      </div>
     )
   }
 }
