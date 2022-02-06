@@ -1,0 +1,19 @@
+@import './../../../../assets/variables.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  margin-bottom: 5px;
+  color: $whiteColor;
+}
+
+.effectiveDate {
+  margin-bottom: 30px;
+  font-size: 0.8rem;
+  color: $whiteColor;
+}

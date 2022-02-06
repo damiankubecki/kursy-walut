@@ -8,7 +8,7 @@ const { facebookColor, githubColor, linkedInColor } = variables
 const ProfilesNavigation = () => (
   <div className={styles.wrapper}>
     <LinkButton
-      href="#"
+      href="https://www.facebook.com/damian.kubecki111/"
       iconLink="fab fa-facebook"
       title="Odwiedź profil facebook"
       hoverColor={facebookColor}

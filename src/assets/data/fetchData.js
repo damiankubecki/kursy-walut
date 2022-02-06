@@ -1,4 +1,5 @@
 import axios from 'axios'
+import currenciesInfo from './currenciesInfo'
 
 export default class Data {
   static getLastRatesOfAllCurrecies() {
@@ -6,9 +7,18 @@ export default class Data {
       axios
         .get('https://api.nbp.pl/api/exchangerates/tables/a/')
         .then(res => {
-          resolve({
+          const response = {
             date: res.data[0].effectiveDate,
-            rates: res.data[0].rates,
+            data: res.data[0].rates,
+          }
+          resolve({
+            date: response.date,
+            data: response.data.map(currency => {
+              const staticInfo = currenciesInfo.find(
+                info => info.code === currency.code
+              )
+              return { category: 99, ...currency, ...staticInfo }
+            }),
           })
         })
         .catch(err => reject(err))
@@ -18,7 +28,9 @@ export default class Data {
   static getLastRatesOfCurrency(currencyCode, days) {
     return new Promise((resolve, reject) => {
       axios
-        .get(`https://api.nbp.pl/api/exchangerates/rates/a/${currencyCode}/last/${days}/`)
+        .get(
+          `https://api.nbp.pl/api/exchangerates/rates/a/${currencyCode}/last/${days}/`
+        )
         .then(res => {
           resolve({
             code: res.data.code,

@@ -1,0 +1,67 @@
+@import './../../../../../../assets/variables.scss';
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin: 0 10px 20px;
+  padding: 3px 10px;
+  border-bottom: 2px solid $goldColor;
+  border-bottom-right-radius: $borderRadius;
+  z-index: 1;
+  overflow: hidden;
+  transition: 0.15s;
+
+  &:hover {
+    transform: scale(1.15);
+    z-index: 2;
+  }
+}
+
+.link {
+  text-decoration: none;
+  text-align: center;
+}
+
+.name {
+  padding: 5px 0 0;
+  font-size: 1.3rem;
+  color: $whiteColor;
+  text-align: center;
+}
+
+.code {
+  padding: 0 0 8px;
+  font-size: 1rem;
+  color: $whiteColor;
+}
+
+.mid {
+  color: $goldColor;
+  font-size: 1.6rem;
+}
+
+.flag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.83);
+  }
+}
