@@ -4,7 +4,7 @@ import ProfilesNavigation from './ProfilesNavigation/ProfilesNavigation'
 
 const Footer = () => (
   <div className={styles.wrapper}>
-    <p className={styles.paragraph}>created by Damian Kubecki 2022 &copy;</p>
+    <p className={styles.paragraph}>created &amp; designed by Damian Kubecki</p>
     <ProfilesNavigation />
   </div>
 )

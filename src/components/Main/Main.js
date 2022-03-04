@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import styles from './Main.module.scss'
 import data from '../../assets/data/fetchData'
-import DefaultView from './Views/HomeView/HomeView'
+import HomeView from './Views/HomeView/HomeView'
 import SearchView from './Views/SearchView/SearchView'
 import CalculatorView from './Views/CalculatorView/CalculatorView'
 import CuriositesView from './Views/CuriositesView/CuriositesView'
@@ -30,6 +30,8 @@ class Main extends React.Component {
   }
 
   render() {
+    const { currenciesData } = this.state
+    const PLN = { code: 'PLN', mid: 1 }
     return (
       <div className={styles.wrapper}>
         {!this.state.loading && (
@@ -37,10 +39,15 @@ class Main extends React.Component {
             <Route
               exact
               path="/"
-              element={<DefaultView currenciesData={this.state.currenciesData} />}
+              element={<HomeView currenciesData={currenciesData} />}
             />
             <Route exact path="/search" element={<SearchView />} />
-            <Route path="/calculator" element={<CalculatorView />} />
+            <Route
+              path="/calculator"
+              element={
+                <CalculatorView currenciesData={[PLN, ...currenciesData.data]} />
+              }
+            />
             <Route path="/curiosites" element={<CuriositesView />} />
             <Route path="/info" element={<InfoView />} />
           </Routes>

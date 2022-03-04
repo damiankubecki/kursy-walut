@@ -2,10 +2,10 @@ import React from 'react'
 import styles from './HomeView.module.scss'
 import CurrenciesList from './CurrenciesList/CurrenciesList'
 
-const DefaultView = ({ currenciesData }) => {
+const HomeView = ({ currenciesData }) => {
   const effectiveDate = currenciesData.date
   const currenciesList = currenciesData.data
-
+  console.log(currenciesList)
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.title}>Aktualne kursy</h2>
@@ -15,4 +15,4 @@ const DefaultView = ({ currenciesData }) => {
   )
 }
 
-export default DefaultView
+export default HomeView
