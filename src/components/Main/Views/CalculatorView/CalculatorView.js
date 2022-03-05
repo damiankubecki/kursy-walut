@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './CalculatorView.module.scss'
-import OptionsList from './OptionsList/OptionsList'
-import Button from '../../../elements/Button/Button'
+import CalcForm from './CalcForm/CalcForm'
 
 class CalculatorView extends React.Component {
   #initialCurrencies = {
@@ -46,7 +45,7 @@ class CalculatorView extends React.Component {
     })
   }
   handleSumChange = e => this.setState({ [e.target.name]: e.target.value * 1 })
-  switchConvert = () => {
+  switchConvertedCurrencies = e => {
     const oldData = {
       convertFrom: this.state.convertFrom,
       convertTo: this.state.convertTo,
@@ -62,45 +61,14 @@ class CalculatorView extends React.Component {
     return (
       <div className={styles.wrapper}>
         <h2 className={styles.title}>Kalkulator</h2>
-        <div className={styles.currenciesForm}>
-          <OptionsList
-            listName="convertFrom"
-            currencies={currencies}
-            selectedCurrency={this.state.convertFrom}
-            otherSelectedCurrency={convertTo}
-            selectFn={this.selectFn}
-          >
-            Mam
-          </OptionsList>
-          <Button noBorder bigger margin="5px" onClick={this.switchConvert}>
-            <i className="fa-solid fa-right-left"></i>
-          </Button>
-          <OptionsList
-            listName="convertTo"
-            currencies={currencies}
-            selectedCurrency={convertTo}
-            otherSelectedCurrency={convertFrom}
-            selectFn={this.selectFn}
-          >
-            Chcę otrzymać
-          </OptionsList>
-        </div>
-        <div className={styles.sumForm}>
-          <p className={styles.paragraph}>Kwota</p>
-          <div className={styles.sumContainer}>
-            <input
-              className={styles.sum}
-              type="number"
-              name="sum"
-              placeholder="Wpisz kwotę"
-              onChange={this.handleSumChange}
-            />
-            <p className={styles.code}>{convertFrom.code}</p>
-          </div>
-        </div>
-        <Button bigger margin="30px 0 0">
-          Przelicz
-        </Button>
+        <CalcForm
+          convertFrom={convertFrom}
+          convertTo={convertTo}
+          currencies={currencies}
+          selectFn={this.selectFn}
+          handleSumChange={this.handleSumChange}
+          switchConvertedCurrencies={this.switchConvertedCurrencies}
+        />
         <p className={styles.result}>{result}</p>
       </div>
     )

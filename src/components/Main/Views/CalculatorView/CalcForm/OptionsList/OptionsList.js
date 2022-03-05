@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './OptionsList.module.scss'
-import Option from './Option/Option'
 
 const OptionsList = ({
   listName,
@@ -23,7 +22,11 @@ const OptionsList = ({
         {currencies
           .filter(currency => !currency.used || currency !== otherSelectedCurrency)
           .map(currency => {
-            return <Option key={currency.code} {...currency} />
+            return (
+              <option value={currency.code}>
+                {currency.code} - {currency.currency}
+              </option>
+            )
           })}
       </select>
     </div>
