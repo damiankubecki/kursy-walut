@@ -1,0 +1,21 @@
+@import './../../../../../assets/variables.scss';
+
+.wrapper {
+  margin-top: 50px;
+  color: $whiteColor;
+  text-align: center;
+
+  .leftSection {
+    font-size: 1.6rem;
+  }
+
+  .rightSection {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .note {
+    margin-top: 5px;
+    font-size: 0.9rem;
+  }
+}

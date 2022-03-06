@@ -5,7 +5,6 @@ import CurrenciesList from './CurrenciesList/CurrenciesList'
 const HomeView = ({ currenciesData }) => {
   const effectiveDate = currenciesData.date
   const currenciesList = currenciesData.data
-  console.log(currenciesList)
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.title}>Aktualne kursy</h2>

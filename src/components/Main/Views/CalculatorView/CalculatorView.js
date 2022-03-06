@@ -1,75 +1,46 @@
 import React from 'react'
 import styles from './CalculatorView.module.scss'
 import CalcForm from './CalcForm/CalcForm'
+import CalcResult from './CalcResult/CalcResult'
 
 class CalculatorView extends React.Component {
-  #initialCurrencies = {
-    from: 'PLN',
-    to: 'EUR',
-  }
-
   state = {
-    convertFrom: this.props.currenciesData.find(
-      currency => currency.code === this.#initialCurrencies.from
-    ),
-    convertTo: this.props.currenciesData.find(
-      currency => currency.code === this.#initialCurrencies.to
-    ),
-    currencies: this.props.currenciesData,
-    sum: 0,
-    result: 0,
+    result: {
+      amount: 0,
+      exchangeRate: 0,
+      from: {
+        sum: 0,
+        fromCurrency: '',
+      },
+      to: '',
+    },
   }
 
-  selectFn = e => {
-    const { currencies, convertFrom, convertTo } = this.state
-
+  clearResult = () => this.setState({ result: null })
+  calculate = (sum, exchangeRate, fromCurrency, toCurrency) => {
+    const calcResult = sum * exchangeRate
     this.setState({
-      [e.target.name]: currencies.find(currency => currency.code === e.target.value),
-    })
-
-    currencies.forEach(currency => {
-      if (currency !== convertFrom && currency !== convertTo)
-        return (currency.used = false)
-    })
-    const currentCurency = currencies.find(
-      currency => currency.code === e.target.value
-    )
-    if (currentCurency) {
-      currentCurency.used = true
-    }
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        currencies: currencies,
-      }
-    })
-  }
-  handleSumChange = e => this.setState({ [e.target.name]: e.target.value * 1 })
-  switchConvertedCurrencies = e => {
-    const oldData = {
-      convertFrom: this.state.convertFrom,
-      convertTo: this.state.convertTo,
-    }
-    this.setState({
-      convertFrom: oldData.convertTo,
-      convertTo: oldData.convertFrom,
+      result: {
+        amount: calcResult,
+        exchangeRate: exchangeRate,
+        from: { sum: sum.toFixed(2), fromCurrency: fromCurrency },
+        to: toCurrency,
+      },
     })
   }
 
   render() {
-    const { convertFrom, convertTo, currencies, result } = this.state
+    const { data } = this.props.currenciesData
+    const PLN = { code: 'PLN', mid: 1, currency: 'polski złoty' }
     return (
       <div className={styles.wrapper}>
         <h2 className={styles.title}>Kalkulator</h2>
         <CalcForm
-          convertFrom={convertFrom}
-          convertTo={convertTo}
-          currencies={currencies}
-          selectFn={this.selectFn}
-          handleSumChange={this.handleSumChange}
-          switchConvertedCurrencies={this.switchConvertedCurrencies}
+          currenciesData={[PLN, ...data]}
+          calculate={this.calculate}
+          clearResult={this.clearResult}
         />
-        <p className={styles.result}>{result}</p>
+        <CalcResult result={this.state.result} />
       </div>
     )
   }

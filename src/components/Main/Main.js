@@ -31,7 +31,7 @@ class Main extends React.Component {
 
   render() {
     const { currenciesData } = this.state
-    const PLN = { code: 'PLN', mid: 1 }
+
     return (
       <div className={styles.wrapper}>
         {!this.state.loading && (
@@ -45,7 +45,7 @@ class Main extends React.Component {
             <Route
               path="/calculator"
               element={
-                <CalculatorView currenciesData={[PLN, ...currenciesData.data]} />
+                <CalculatorView currenciesData={currenciesData} />
               }
             />
             <Route path="/curiosites" element={<CuriositesView />} />
