@@ -1,28 +1,27 @@
 import React from 'react'
 import styles from './CalcResult.module.scss'
 
-const CalcResult = ({ result }) => {
-  const { amount, exchangeRate, from, to, rateDate } = result || {}
+const CalcResult = ({ showResult, result, rateDate }) => {
+  const { amount, exchangeRate, from, to } = result || {}
   return (
-    <>
-      {result?.amount ? (
-        <div className={styles.wrapper}>
+    <div className={styles.wrapper}>
+      {showResult && (
+        <>
           <p>
             <span className={styles.leftSection}>
-              {from.sum.toString().replace('.', ',')} {from.fromCurrency} ={' '}
+              {from.sum} {from.fromCurrency} ={' '}
             </span>
             <span className={styles.rightSection}>
-              {amount.toFixed(2).toString().replace('.', ',')} {to}
+              {amount} {to}
             </span>
           </p>
           <p className={styles.note}>
-            1 {from.fromCurrency} ={' '}
-            {exchangeRate.toFixed(4).toString().replace('.', ',')} {to}, według
-            średniego kursu NBP z dnia {rateDate}
+            1 {from.fromCurrency} = {exchangeRate} {to}, według średniego kursu NBP z
+            dnia {rateDate}
           </p>
-        </div>
-      ) : null}
-    </>
+        </>
+      )}
+    </div>
   )
 }
 

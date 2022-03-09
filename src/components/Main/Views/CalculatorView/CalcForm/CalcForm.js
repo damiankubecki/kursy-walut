@@ -36,7 +36,8 @@ class CalcForm extends React.Component {
     })
   }
 
-  selectFn = e => {
+  setSum = value => this.setState({ sum: value })
+  changeSelectOptionFn = e => {
     const { currencies, convertFrom, convertTo } = this.state
 
     this.setState({
@@ -60,7 +61,28 @@ class CalcForm extends React.Component {
       }
     })
   }
-  handleSumChange = e => this.setState({ [e.target.name]: e.target.value * 1 })
+  calculate = () => {
+    const { convertFrom, convertTo, sum } = this.state
+
+    if (convertFrom && convertTo && sum) {
+      const exchangeRate = convertFrom.mid / convertTo.mid
+      const calcResult = sum * exchangeRate
+      this.props.setResult(
+        calcResult,
+        sum,
+        exchangeRate,
+        convertFrom.code,
+        convertTo.code
+      )
+      return true
+    }
+    return false
+  }
+  showResult = e => {
+    e.preventDefault()
+    if (this.calculate()) return this.props.setResultVisibility(true)
+    this.props.setResultVisibility(false)
+  }
   switchConvertedCurrencies = e => {
     e.preventDefault()
     const oldData = {
@@ -72,35 +94,22 @@ class CalcForm extends React.Component {
       convertTo: oldData.convertFrom,
     })
   }
-  submit = e => {
+  resetSelectedCurrencies = e => {
     e.preventDefault()
-
-    const { convertFrom, convertTo, sum } = this.state
-
-    if (convertFrom && convertTo && sum) {
-      const exchangeRate = convertFrom.mid / convertTo.mid
-      this.props.calculate(sum, exchangeRate, convertFrom.code, convertTo.code)
-    } else {
-      this.props.clearResult() 
-    }
+    this.setState({ convertFrom: '', convertTo: '' })
   }
 
   render() {
-    const { convertFrom, convertTo, currencies } = this.state
     return (
       <form className={styles.wrapper}>
         <ChooseCurrenciesSection
-          convertFrom={convertFrom}
-          convertTo={convertTo}
-          currencies={currencies}
-          selectFn={this.selectFn}
+          changeSelectOptionFn={this.changeSelectOptionFn}
           switchConvertedCurrencies={this.switchConvertedCurrencies}
+          resetSelectedCurrencies={this.resetSelectedCurrencies}
+          {...this.state}
         />
-        <SumSection
-          convertFrom={convertFrom}
-          handleSumChange={this.handleSumChange}
-        />
-        <Button bigger margin="30px 0 0" onClick={this.submit}>
+        <SumSection convertFrom={this.state.convertFrom} setSum={this.setSum} />
+        <Button bigger margin="30px 0 0" onClick={this.showResult}>
           Przelicz
         </Button>
       </form>

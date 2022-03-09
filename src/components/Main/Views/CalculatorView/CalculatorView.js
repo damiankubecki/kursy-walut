@@ -14,33 +14,40 @@ class CalculatorView extends React.Component {
       },
       to: '',
     },
+    showResult: false,
   }
 
-  clearResult = () => this.setState({ result: null })
-  calculate = (sum, exchangeRate, fromCurrency, toCurrency) => {
-    const calcResult = sum * exchangeRate
+  setResultVisibility = value => this.setState({ showResult: value })
+  setResult = (calcResult, sum, exchangeRate, fromCurrency, toCurrency) => {
     this.setState({
       result: {
-        amount: calcResult,
-        exchangeRate: exchangeRate,
-        from: { sum: sum.toFixed(2), fromCurrency: fromCurrency },
+        amount: calcResult.toFixed(2).toString().replace('.', ','),
+        exchangeRate: exchangeRate.toFixed(4).toString().replace('.', ','),
+        from: {
+          sum: sum.toFixed(2).toString().replace('.', ','),
+          fromCurrency: fromCurrency,
+        },
         to: toCurrency,
       },
     })
   }
 
   render() {
-    const { data } = this.props.currenciesData
+    const { data, date } = this.props.currenciesData
     const PLN = { code: 'PLN', mid: 1, currency: 'polski złoty' }
     return (
       <div className={styles.wrapper}>
         <h2 className={styles.title}>Kalkulator</h2>
         <CalcForm
           currenciesData={[PLN, ...data]}
-          calculate={this.calculate}
-          clearResult={this.clearResult}
+          setResult={this.setResult}
+          setResultVisibility={this.setResultVisibility}
         />
-        <CalcResult result={this.state.result} />
+        <CalcResult
+          showResult={this.state.showResult}
+          result={this.state.result}
+          rateDate={date}
+        />
       </div>
     )
   }

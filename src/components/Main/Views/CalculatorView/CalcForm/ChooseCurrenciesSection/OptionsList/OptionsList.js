@@ -5,7 +5,7 @@ const OptionsList = ({
   listName,
   currencies,
   selectedCurrency,
-  otherSelectedCurrency,
+  anotherSelectedCurrency,
   selectFn,
   children,
 }) => {
@@ -16,11 +16,11 @@ const OptionsList = ({
         className={styles.select}
         name={listName}
         onChange={selectFn}
-        value={selectedCurrency?.code}
+        value={selectedCurrency ? selectedCurrency.code : 'default'}
       >
         <option value="default">Wybierz walutę</option>
         {currencies
-          .filter(currency => !currency.used || currency !== otherSelectedCurrency)
+          .filter(currency => !currency.used || currency !== anotherSelectedCurrency)
           .map(currency => {
             return (
               <option key={currency.code} value={currency.code}>

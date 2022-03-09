@@ -1,14 +1,15 @@
 import React from 'react'
 import styles from './ChooseCurrenciesSection.module.scss'
 import OptionsList from './OptionsList/OptionsList'
-import Button from '../../../../../elements/Button/Button'
+import Buttons from './Buttons/Buttons'
 
 const ChooseCurrenciesSection = ({
   convertFrom,
   convertTo,
   currencies,
-  selectFn,
+  changeSelectOptionFn,
   switchConvertedCurrencies,
+  resetSelectedCurrencies,
 }) => {
   return (
     <div className={styles.wrapper}>
@@ -16,20 +17,21 @@ const ChooseCurrenciesSection = ({
         listName="convertFrom"
         currencies={currencies}
         selectedCurrency={convertFrom}
-        otherSelectedCurrency={convertTo}
-        selectFn={selectFn}
+        anotherSelectedCurrency={convertTo}
+        selectFn={changeSelectOptionFn}
       >
         Mam
       </OptionsList>
-      <Button noBorder bigger margin="5px" onClick={switchConvertedCurrencies}>
-        <i className="fa-solid fa-right-left"></i>
-      </Button>
+      <Buttons
+        switchFn={switchConvertedCurrencies}
+        resetFn={resetSelectedCurrencies}
+      />
       <OptionsList
         listName="convertTo"
         currencies={currencies}
         selectedCurrency={convertTo}
-        otherSelectedCurrency={convertFrom}
-        selectFn={selectFn}
+        anotherSelectedCurrency={convertFrom}
+        selectFn={changeSelectOptionFn}
       >
         Chcę otrzymać
       </OptionsList>

@@ -36,4 +36,17 @@
     font-size: 1.1rem;
     color: $whiteColor;
   }
+
+  .clear {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $darkBlackColor;
+    cursor: pointer;
+  }
+
+  &:hover .clear {
+    color: $goldColor;
+  }
 }
