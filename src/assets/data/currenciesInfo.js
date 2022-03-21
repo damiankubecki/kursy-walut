@@ -1,105 +1,133 @@
+//infos are added during data fetching
 const currencies = [
   {
     code: 'EUR',
     category: 1,
-    flag: require('./../images/EUR.png'),
+    country: 'Unia Europejska',
     websitePL: 'https://pl.wikipedia.org/wiki/Euro',
-    websiteEN: 'https://en.wikipedia.org/wiki/Euro',
   },
   {
     code: 'USD',
     category: 1,
-    flag: require('./../images/USD.png'),
+    country: 'USA',
     websitePL: 'https://pl.wikipedia.org/wiki/Dolar_ameryka%C5%84ski',
-    websiteEN: 'https://en.wikipedia.org/wiki/United_States_dollar',
   },
   {
     code: 'CHF',
     category: 1,
-    flag: require('./../images/CHF.png'),
+    country: 'Szwajcaria',
     websitePL: 'https://pl.wikipedia.org/wiki/Frank_szwajcarski',
-    websiteEN: 'https://en.wikipedia.org/wiki/Swiss_franc',
   },
   {
     code: 'GBP',
     category: 1,
-    flag: require('./../images/GBP.png'),
+    country: 'W. Brytania',
     websitePL: 'https://pl.wikipedia.org/wiki/Funt_szterling',
-    websiteEN: 'https://en.wikipedia.org/wiki/Pound_sterling',
-  },
-  {
-    code: 'AUD',
-    flag: require('./../images/AUD.png'),
-    websitePL: 'https://pl.wikipedia.org/wiki/Dolar_australijski',
-    websiteEN: 'https://en.wikipedia.org/wiki/Australian_dollar',
-  },
-  {
-    code: 'RUB',
-    category: 1,
-    flag: require('./../images/RUB.png'),
-    websitePL: '',
-    websiteEN: '',
   },
   {
     code: 'CAD',
-    flag: require('./../images/CAD.png'),
+    category: 2,
+    country: 'Kanada',
     websitePL: 'https://pl.wikipedia.org/wiki/Dolar_kanadyjski',
-    websiteEN: 'https://en.wikipedia.org/wiki/Canadian_dollar',
+  },
+  {
+    code: 'AUD',
+    category: 2,
+    country: 'Australia',
+    websitePL: 'https://pl.wikipedia.org/wiki/Dolar_australijski',
+  },
+  {
+    code: 'RUB',
+    category: 2,
+    country: 'Rosja',
+    websitePL: 'https://pl.wikipedia.org/wiki/Rubel',
   },
   {
     code: 'HUF',
-    flag: require('./../images/HUF.png'),
+    category: 2,
+    country: 'Węgry',
     websitePL: 'https://pl.wikipedia.org/wiki/Forint',
-    websiteEN: 'https://en.wikipedia.org/wiki/Hungarian_forint',
   },
   {
     code: 'UAH',
-    flag: require('./../images/UAH.png'),
-    websitePL: '',
-    websiteEN: '',
+    category: 2,
+    country: 'Ukraina',
+    websitePL: 'https://pl.wikipedia.org/wiki/Hrywna',
   },
   {
     code: 'JPY',
-    flag: require('./../images/JPY.png'),
-    websitePL: '',
-    websiteEN: '',
+    category: 1,
+    country: 'Japonia',
+    websitePL: 'https://pl.wikipedia.org/wiki/Jen',
   },
   {
     code: 'CZK',
-    flag: require('./../images/CZK.png'),
-    websitePL: '',
-    websiteEN: '',
+    category: 2,
+    country: 'Czechy',
+    websitePL: 'https://pl.wikipedia.org/wiki/Korona_czeska',
   },
   {
     code: 'DKK',
-    flag: require('./../images/DKK.png'),
-    websitePL: '',
-    websiteEN: '',
+    category: 2,
+    country: 'Dania',
+    websitePL: 'https://pl.wikipedia.org/wiki/Korona_du%C5%84ska',
   },
   {
     code: 'NOK',
-    flag: require('./../images/NOK.png'),
-    websitePL: '',
-    websiteEN: '',
+    category: 2,
+    country: 'Norwegia',
+    websitePL: 'https://pl.wikipedia.org/wiki/Korona_norweska',
   },
   {
     code: 'SEK',
-    flag: require('./../images/SEK.png'),
-    websitePL: '',
-    websiteEN: '',
+    category: 2,
+    country: 'Szwecja',
+    websitePL: 'https://pl.wikipedia.org/wiki/Korona_szwedzka',
   },
   {
     code: 'HRK',
-    flag: require('./../images/HRK.png'),
-    websitePL: '',
-    websiteEN: '',
+    category: 2,
+    country: 'Chorwacja',
+    websitePL: 'https://pl.wikipedia.org/wiki/Kuna_(waluta)',
   },
   {
     code: 'TRY',
-    flag: require('./../images/TRY.png'),
+    category: 3,
+    country: 'Turcja',
+    websitePL: 'https://pl.wikipedia.org/wiki/Nowa_lira_turecka',
+  },
+  {
+    code: 'THB',
+    category: 5,
+    country: 'Tajlandia',
     websitePL: '',
-    websiteEN: '',
+  },
+  {
+    code: 'HKD',
+    category: 5,
+    country: 'Hongkong',
+    websitePL: '',
+  },
+  {
+    code: 'NZD',
+    category: 5,
+    country: 'Nowa Zelandia',
+    websitePL: '',
+  },
+  {
+    code: 'SGD',
+    category: 5,
+    country: 'Singapur',
+    websitePL: '',
   },
 ]
+
+currencies.forEach(currency => {
+  try {
+    currency.flag = require(`./../images/${currency.code}.png`)
+  } catch (err) {
+    currency.flag = null
+  }
+})
 
 export default currencies

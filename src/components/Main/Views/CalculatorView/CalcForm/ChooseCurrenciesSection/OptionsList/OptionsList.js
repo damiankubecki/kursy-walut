@@ -24,7 +24,7 @@ const OptionsList = ({
           .map(currency => {
             return (
               <option key={currency.code} value={currency.code}>
-                {currency.code} - {currency.currency}
+                {currency.code} - {currency.country || currency.currency}
               </option>
             )
           })}

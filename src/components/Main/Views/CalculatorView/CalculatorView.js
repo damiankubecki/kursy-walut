@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './CalculatorView.module.scss'
 import CalcForm from './CalcForm/CalcForm'
 import CalcResult from './CalcResult/CalcResult'
+import { PLN } from './../../../../config'
 
 class CalculatorView extends React.Component {
   state = {
@@ -34,7 +35,7 @@ class CalculatorView extends React.Component {
 
   render() {
     const { data, date } = this.props.currenciesData
-    const PLN = { code: 'PLN', mid: 1, currency: 'polski złoty' }
+
     return (
       <div className={styles.wrapper}>
         <h2 className={styles.title}>Kalkulator</h2>

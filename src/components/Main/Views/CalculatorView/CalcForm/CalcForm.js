@@ -3,12 +3,13 @@ import styles from './CalcForm.module.scss'
 import ChooseCurrenciesSection from './ChooseCurrenciesSection/ChooseCurrenciesSection'
 import SumSection from './SumSection/SumSection'
 import Button from '../../../../elements/Button/Button'
+import { calculatorViewConfig } from './../../../../../config'
 
 class CalcForm extends React.Component {
   #currenciesData = this.props.currenciesData
   #initialCurrencies = {
-    from: 'PLN',
-    to: 'EUR',
+    from: calculatorViewConfig.initialCurrencies.from,
+    to: calculatorViewConfig.initialCurrencies.to,
   }
 
   state = {
@@ -61,7 +62,7 @@ class CalcForm extends React.Component {
       }
     })
   }
-  calculate = () => {
+  calculateResult = () => {
     const { convertFrom, convertTo, sum } = this.state
 
     if (convertFrom && convertTo && sum) {
@@ -80,7 +81,7 @@ class CalcForm extends React.Component {
   }
   showResult = e => {
     e.preventDefault()
-    if (this.calculate()) return this.props.setResultVisibility(true)
+    if (this.calculateResult()) return this.props.setResultVisibility(true)
     this.props.setResultVisibility(false)
   }
   switchConvertedCurrencies = e => {
