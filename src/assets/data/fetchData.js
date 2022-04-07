@@ -21,7 +21,10 @@ export default class Data {
             }),
           })
         })
-        .catch(err => reject(err))
+        .catch(() => {
+          reject()
+          throw new Error('Cannot fetch the data')
+        })
     })
   }
 

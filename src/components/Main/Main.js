@@ -26,7 +26,9 @@ class Main extends React.Component {
           this.props.closeInitScreen()
         }, 800)
       })
-      .catch(err => console.log(err, 'nie udalo sie pobrac danych'))
+      .catch(() => {
+        throw new Error('An error occurred in rendering main section')
+      })
   }
 
   render() {
@@ -41,12 +43,14 @@ class Main extends React.Component {
               path="/"
               element={<HomeView currenciesData={currenciesData} />}
             />
-            <Route exact path="/search" element={<SearchView />} />
+            <Route
+              exact
+              path="/search"
+              element={<SearchView currenciesData={currenciesData.data} />}
+            />
             <Route
               path="/calculator"
-              element={
-                <CalculatorView currenciesData={currenciesData} />
-              }
+              element={<CalculatorView currenciesData={currenciesData} />}
             />
             <Route path="/curiosites" element={<CuriositesView />} />
             <Route path="/info" element={<InfoView />} />

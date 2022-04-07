@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './ChooseCurrenciesSection.module.scss'
-import OptionsList from './OptionsList/OptionsList'
+import CurrenciesSelectList from '../../../../../elements/CurrenciesSelectList/CurrenciesSelectList'
 import Buttons from './Buttons/Buttons'
 
 const ChooseCurrenciesSection = ({
@@ -13,28 +13,28 @@ const ChooseCurrenciesSection = ({
 }) => {
   return (
     <div className={styles.wrapper}>
-      <OptionsList
+      <CurrenciesSelectList
         listName="convertFrom"
-        currencies={currencies}
+        currenciesCollection={currencies}
         selectedCurrency={convertFrom}
-        anotherSelectedCurrency={convertTo}
-        selectFn={changeSelectOptionFn}
+        calculator={{ anotherSelectedCurrency: convertTo }}
+        onChange={changeSelectOptionFn}
       >
         Mam
-      </OptionsList>
+      </CurrenciesSelectList>
       <Buttons
         switchFn={switchConvertedCurrencies}
         resetFn={resetSelectedCurrencies}
       />
-      <OptionsList
+      <CurrenciesSelectList
         listName="convertTo"
-        currencies={currencies}
+        currenciesCollection={currencies}
         selectedCurrency={convertTo}
-        anotherSelectedCurrency={convertFrom}
-        selectFn={changeSelectOptionFn}
+        calculator={{ anotherSelectedCurrency: convertFrom }}
+        onChange={changeSelectOptionFn}
       >
         Chcę otrzymać
-      </OptionsList>
+      </CurrenciesSelectList>
     </div>
   )
 }
