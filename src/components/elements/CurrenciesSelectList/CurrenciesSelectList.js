@@ -15,8 +15,8 @@ const CurrenciesSelectList = ({
   currenciesCollection.sort((a, b) => a.category - b.category)
   const { anotherSelectedCurrency } = calculator
   return (
-    <div>
-      <p className={styles.title}>{children}</p>
+    <div className={styles.wrapper}>
+      {children && <p className={styles.title}>{children}</p>}
       <select
         className={styles.select}
         name={listName}

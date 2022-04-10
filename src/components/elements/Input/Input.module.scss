@@ -1,44 +1,57 @@
 @import './../../../assets/variables.scss';
 
-.inputContainer {
-  position: relative;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  .input {
-    width: 200px;
-    margin: 5px 0;
-    padding: 5px 10px 2px;
-    border: none;
-    border-bottom: 2px solid $goldColor;
-    border-radius: 10px;
-    background-color: $lightBlackColor;
+  .title {
+    padding: 5px 0;
+    text-align: center;
     color: $whiteColor;
     font-size: 1.3rem;
-    text-align: right;
+  }
 
-    &:focus {
-      outline: none;
+  .inputContainer {
+    position: relative;
+
+    .input {
+      width: 200px;
+      margin: 5px 0;
+      padding: 5px 10px 2px;
+      border: none;
+      border-bottom: 2px solid $goldColor;
+      border-radius: 10px;
+      background-color: $lightBlackColor;
+      color: $whiteColor;
+      font-size: 1.3rem;
+      text-align: right;
+
+      &:focus {
+        outline: none;
+      }
     }
-  }
 
-  .suffix {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.1rem;
-    color: $whiteColor;
-  }
+    .suffix {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.1rem;
+      color: $whiteColor;
+    }
 
-  .clearBtn {
-    position: absolute;
-    left: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: $darkBlackColor;
-    cursor: pointer;
+    .clearBtn {
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $darkBlackColor;
+      cursor: pointer;
 
-    &:hover {
-      color: $goldColor;
+      &:hover {
+        color: $goldColor;
+      }
     }
   }
 }

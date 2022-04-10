@@ -1,23 +1,29 @@
 @import './../../../assets/variables.scss';
 
-.title {
-  padding: 10px 0;
-  text-align: center;
-  color: $whiteColor;
-  font-size: 1.3rem;
-}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-.select {
-  width: 200px;
-  padding: 5px 5px 2px;
-  border: 0;
-  border-bottom: 2px solid $goldColor;
-  border-radius: 10px;
-  font-size: 1rem;
-  background-color: $lightBlackColor;
-  color: $whiteColor;
+  .title {
+    padding: 5px 0;
+    text-align: center;
+    color: $whiteColor;
+    font-size: 1.3rem;
+  }
 
-  &:focus {
-    outline: none;
+  .select {
+    width: 200px;
+    padding: 5px 5px 2px;
+    border: 0;
+    border-bottom: 2px solid $goldColor;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: $lightBlackColor;
+    color: $whiteColor;
+
+    &:focus {
+      outline: none;
+    }
   }
 }
