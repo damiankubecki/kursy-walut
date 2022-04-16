@@ -28,16 +28,16 @@ export default class Data {
     })
   }
 
-  static getLastRatesOfCurrency(currencyCode, days) {
+  static getLastRatesOfCurrency(currencyCode, lastRatesNumber) {
     return new Promise((resolve, reject) => {
       axios
         .get(
-          `https://api.nbp.pl/api/exchangerates/rates/a/${currencyCode}/last/${days}/`
+          `https://api.nbp.pl/api/exchangerates/rates/a/${currencyCode}/last/${lastRatesNumber}/`
         )
         .then(res => {
           resolve({
-            code: res.data.code,
             currency: res.data.currency,
+            ...currenciesInfo.find(currency => currency.code === res.data.code),
             rates: [...res.data.rates].map(rate => {
               return {
                 date: rate.effectiveDate,
@@ -46,27 +46,10 @@ export default class Data {
             }),
           })
         })
-        .catch(err => {
-          console.log(err)
-          reject(false)
+        .catch(() => {
+          reject()
+          throw new Error('Cannot fetch the data')
         })
     })
   }
 }
-
-// const fetchData = dataToFetch => {
-//   let interval = setInterval(() => {
-//     console.log('trwa pobieranie')
-//   }, 5)
-//   dataToFetch()
-//     .then(res => {
-//       console.log('pobrałem juz')
-//       return res
-//     })
-//     .catch(err => {
-//       console.log('nie udalo sie')
-//     })
-//     .finally(() => {
-//       clearInterval(interval)
-//     })
-// }
