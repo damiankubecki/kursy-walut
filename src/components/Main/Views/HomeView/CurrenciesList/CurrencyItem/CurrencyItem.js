@@ -4,11 +4,11 @@ import variables from './../../../../../../assets/variables.scss'
 
 const { darkBlackColor } = variables
 
-const CurrencyItem = ({ currency, code, mid, flag, websitePL }) => {
+const CurrencyItem = ({ currency, code, mid, flag, wikipediaLink }) => {
   return (
     <div className={styles.wrapper}>
-      {websitePL ? (
-        <a className={styles.link} href={websitePL}>
+      {wikipediaLink ? (
+        <a className={styles.link} href={wikipediaLink}>
           <p className={styles.name}>{currency}</p>
           <p className={styles.code}>({code})</p>
         </a>

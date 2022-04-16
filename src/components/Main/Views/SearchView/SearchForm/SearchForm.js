@@ -10,9 +10,10 @@ const SearchForm = ({
   currency,
   handleCurrencyChange,
   handleRatesNumberChange,
+  submitFn,
 }) => {
   return (
-    <form className={styles.wrapper}>
+    <form className={styles.wrapper} onSubmit={e => submitFn(e)}>
       <div className={styles.selectContainer}>
         <CurrenciesSelectList
           currenciesCollection={currenciesData}

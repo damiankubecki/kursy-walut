@@ -13,6 +13,7 @@
   z-index: 1;
   overflow: hidden;
   transition: 0.15s;
+  cursor: default;
 
   &:hover {
     transform: scale(1.15);
