@@ -12,7 +12,6 @@ const Loader = ({ itemsColor, fontSize, animationSize, children }) => (
 
 Loader.propTypes = {
   itemsColor: PropTypes.string.isRequired,
-  fontSize: PropTypes.string.isRequired,
   animationSize: PropTypes.number.isRequired,
 }
 

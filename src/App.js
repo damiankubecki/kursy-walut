@@ -9,7 +9,7 @@ class App extends React.Component {
   state = {
     isInitScreenActive: true,
   }
-  closeInitScreen = () => this.setState({ initScreenActive: false })
+  closeInitScreen = () => this.setState({ isInitScreenActive: false })
 
   render() {
     const { isInitScreenActive } = this.state
