@@ -18,7 +18,6 @@
     align-items: center;
     position: relative;
     min-height: 600px;
-    min-width: 75vw;
     max-width: 1000px;
     padding: 25px;
     box-shadow: 9px 9px 30px 20px $darkBlackColor;
@@ -28,6 +27,7 @@
     background-attachment: fixed;
     background-size: cover;
     text-align: center;
+    overflow: hidden;
     animation: openAnimation 0.3s linear both;
 
     .title {
@@ -47,9 +47,10 @@
       border: none;
       cursor: pointer;
       transition: 0.2s;
+      z-index: 2;
 
       &:hover {
-        transform: scale(1.15);
+        transform: scale(0.9) rotate(90deg);
       }
     }
   }

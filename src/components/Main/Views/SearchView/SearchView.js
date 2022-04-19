@@ -8,14 +8,17 @@ import Data from '../../../../assets/data/fetchData'
 class SearchView extends React.Component {
   state = {
     currenciesCollection: this.props.currenciesData,
-    currency: this.props.currenciesData.find(currency => currency.code === 'USD'),
-    ratesNumber: 10,
+    form: {
+      currency: this.props.currenciesData.find(currency => currency.code === 'USD'),
+      ratesNumber: 10,
+    },
     result: {
       isWindowActive: false,
       data: {},
     },
     modal: {
       isActive: false,
+      title: '',
       content: '',
     },
   }
@@ -24,46 +27,63 @@ class SearchView extends React.Component {
     const currency = this.state.currenciesCollection.find(
       currency => currency.code === currencyCode
     )
-    this.setState({ currency: currency })
+    this.setState(prevState => {
+      return { form: { ...prevState.form, currency: currency } }
+    })
   }
-  setRatesNumber = number => this.setState({ ratesNumber: number })
+  setRatesNumber = number => {
+    this.setState(prevState => {
+      return { form: { ...prevState.form, ratesNumber: number } }
+    })
+  }
+  openModal = ({ title = '', content = '' }) => {
+    this.setState({
+      modal: {
+        isActive: true,
+        title: title,
+        content: content,
+      },
+    })
+  }
+  closeModal = () => this.setState({ modal: { isActive: false } })
 
   openResultWindow = (currency, ratesNumber) => {
-    if (!currency)
-      return this.setState({
-        modal: { isActive: true, content: 'Nie wybrano waluty' },
+    if (!currency && !ratesNumber) {
+      return this.openModal({ title: '', content: 'Nie uzupełniono formularza' })
+    }
+    if (!currency) {
+      return this.openModal({ title: 'Błąd', content: 'Nie wybrano waluty' })
+    }
+    if (!ratesNumber) {
+      return this.openModal({
+        content: 'Nie wpisano liczby ostatnich notowań',
       })
-    if (!ratesNumber)
-      return this.setState({
-        modal: { isActive: true, content: 'Nie wpisano liczby ostatnich notowań' },
-      })
-    if (!currency && !ratesNumber)
-      return this.setState({
-        modal: { isActive: true, content: 'Nie uzupełniono formularza' },
-      })
+    }
+
     Data.getLastRatesOfCurrency(currency, ratesNumber).then(response => {
       this.setState({ result: { isWindowActive: true, data: { ...response } } })
     })
   }
-  closeResultWindow = () =>
+  closeResultWindow = () => {
     this.setState({ result: { isWindowActive: false, data: {} } })
-
+  }
+  
   formSubmit = e => {
     e.preventDefault()
 
-    const { currency, ratesNumber } = this.state
-    this.openResultWindow(currency.code, ratesNumber)
+    const { form } = this.state
+    this.openResultWindow(form.currency?.code, form.ratesNumber)
   }
 
   render() {
-    const { currenciesCollection, currency, ratesNumber, result, modal } = this.state
+    const { currenciesCollection, form, result, modal } = this.state
     return (
       <div className={styles.wrapper}>
         <h2 className={styles.title}>Szukaj waluty</h2>
         <SearchForm
           currenciesData={currenciesCollection}
-          currency={currency}
-          ratesNumber={ratesNumber}
+          currency={form.currency}
+          ratesNumber={form.ratesNumber}
           handleCurrencyChange={this.setCurrency}
           handleRatesNumberChange={this.setRatesNumber}
           submitFn={this.formSubmit}
@@ -74,7 +94,13 @@ class SearchView extends React.Component {
             {...result.data}
           />
         )}
-        {modal.isActive && <Modal title="Błąd" content={modal.content} />}
+        {modal.isActive && (
+          <Modal
+            title={modal.title}
+            content={modal.content}
+            onClose={this.closeModal}
+          />
+        )}
       </div>
     )
   }
