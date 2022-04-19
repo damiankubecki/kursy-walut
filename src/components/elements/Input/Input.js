@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import styles from './Input.module.scss'
 
-const Input = ({ suffix, maxLength, children, ...props }) => {
+const Input = ({ suffix, maxLength, children, onClear, ...props }) => {
   const input = useRef(null)
   const clearInputValue = () => (input.current.value = '')
   const checkInputLength = e => {
@@ -27,7 +27,13 @@ const Input = ({ suffix, maxLength, children, ...props }) => {
           {...props}
         />
         {suffix && <p className={styles.suffix}>{suffix.toUpperCase()}</p>}
-        <div className={styles.clearBtn} onClick={clearInputValue}>
+        <div
+          className={styles.clearBtn}
+          onClick={() => {
+            clearInputValue()
+            if (typeof onClear === 'function') onClear()
+          }}
+        >
           <i className="fa-solid fa-xmark"></i>
         </div>
       </div>

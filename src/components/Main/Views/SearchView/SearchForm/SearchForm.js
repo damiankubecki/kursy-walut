@@ -29,6 +29,7 @@ const SearchForm = ({
           maxLength={2}
           defaultValue={ratesNumber}
           onChange={e => handleRatesNumberChange(e.target.value * 1)}
+          onClear={() => handleRatesNumberChange(null)}
         >
           Ilość ostatnich notowań:
         </Input>

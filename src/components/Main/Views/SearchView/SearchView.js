@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './SearchView.module.scss'
 import SearchForm from './SearchForm/SearchForm'
 import SearchResultWindow from './SearchResultWindow/SearchResultWindow'
+import Modal from '../../../elements/Modal/Modal'
 import Data from '../../../../assets/data/fetchData'
 
 class SearchView extends React.Component {
@@ -9,8 +10,14 @@ class SearchView extends React.Component {
     currenciesCollection: this.props.currenciesData,
     currency: this.props.currenciesData.find(currency => currency.code === 'USD'),
     ratesNumber: 10,
-    resultWindowActive: false,
-    resultData: {},
+    result: {
+      isWindowActive: false,
+      data: {},
+    },
+    modal: {
+      isActive: false,
+      content: '',
+    },
   }
 
   setCurrency = currencyCode => {
@@ -22,11 +29,24 @@ class SearchView extends React.Component {
   setRatesNumber = number => this.setState({ ratesNumber: number })
 
   openResultWindow = (currency, ratesNumber) => {
+    if (!currency)
+      return this.setState({
+        modal: { isActive: true, content: 'Nie wybrano waluty' },
+      })
+    if (!ratesNumber)
+      return this.setState({
+        modal: { isActive: true, content: 'Nie wpisano liczby ostatnich notowań' },
+      })
+    if (!currency && !ratesNumber)
+      return this.setState({
+        modal: { isActive: true, content: 'Nie uzupełniono formularza' },
+      })
     Data.getLastRatesOfCurrency(currency, ratesNumber).then(response => {
-      this.setState({ resultWindowActive: true, resultData: { ...response } })
+      this.setState({ result: { isWindowActive: true, data: { ...response } } })
     })
   }
-  closeResultWindow = () => this.setState({ resultWindowActive: false })
+  closeResultWindow = () =>
+    this.setState({ result: { isWindowActive: false, data: {} } })
 
   formSubmit = e => {
     e.preventDefault()
@@ -36,13 +56,7 @@ class SearchView extends React.Component {
   }
 
   render() {
-    const {
-      currenciesCollection,
-      currency,
-      ratesNumber,
-      resultWindowActive,
-      resultData,
-    } = this.state
+    const { currenciesCollection, currency, ratesNumber, result, modal } = this.state
     return (
       <div className={styles.wrapper}>
         <h2 className={styles.title}>Szukaj waluty</h2>
@@ -54,9 +68,13 @@ class SearchView extends React.Component {
           handleRatesNumberChange={this.setRatesNumber}
           submitFn={this.formSubmit}
         />
-        {resultWindowActive && (
-          <SearchResultWindow closeWindow={this.closeResultWindow} {...resultData} />
+        {result.isWindowActive && (
+          <SearchResultWindow
+            closeWindow={this.closeResultWindow}
+            {...result.data}
+          />
         )}
+        {modal.isActive && <Modal title="Błąd" content={modal.content} />}
       </div>
     )
   }
