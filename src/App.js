@@ -7,14 +7,15 @@ import Footer from './components/Footer/Footer'
 
 class App extends React.Component {
   state = {
-    initScreenActive: true,
+    isInitScreenActive: true,
   }
   closeInitScreen = () => this.setState({ initScreenActive: false })
 
   render() {
+    const { isInitScreenActive } = this.state
     return (
       <BrowserRouter>
-        <InitialScreen active={this.state.initScreenActive} />
+        {isInitScreenActive && <InitialScreen />}
         <div className="App">
           <Header />
           <Main closeInitScreen={this.closeInitScreen} />
