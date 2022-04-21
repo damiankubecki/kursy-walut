@@ -20,22 +20,28 @@ class SearchForm extends React.Component {
     })
   }
   closeModal = () => this.setState({ modal: { isActive: false } })
-  submit = e => {
+  submit = async e => {
     e.preventDefault()
 
-    const { currency, ratesNumber, submitFn } = this.props
+    const { currency, ratesNumber, openResultWindow } = this.props
+    const modalTitle = 'Błąd'
     if (!currency && !ratesNumber) {
-      return this.openModal({ title: '', content: 'Nie uzupełniono formularza' })
+      return this.openModal({
+        title: modalTitle,
+        content: 'Nie uzupełniono formularza',
+      })
     }
     if (!currency) {
-      return this.openModal({ title: 'Błąd', content: 'Nie wybrano waluty' })
+      return this.openModal({ title: modalTitle, content: 'Nie wybrano waluty' })
     }
     if (!ratesNumber) {
       return this.openModal({
+        title: modalTitle,
         content: 'Nie wpisano liczby ostatnich notowań',
       })
     }
-    submitFn()
+    const error = await openResultWindow()
+    if (error) this.openModal({ title: modalTitle, content: error })
   }
 
   render() {

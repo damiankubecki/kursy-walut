@@ -29,18 +29,30 @@ class SearchView extends React.Component {
       return { form: { ...prevState.form, ratesNumber: number } }
     })
   }
-  openResultWindow = (currency, ratesNumber) => {
-    Data.getLastRatesOfCurrency(currency, ratesNumber).then(response => {
-      this.setState({ result: { isWindowActive: true, data: { ...response } } })
+  fetchCurrencyData = async (currency, ratesNumber) => {
+    const lastCurrencyRates = await Data.getLastRatesOfCurrency(currency, ratesNumber)
+    this.setState(prevState => {
+      return { result: { ...prevState.result, data: { ...lastCurrencyRates } } }
     })
   }
   closeResultWindow = () => {
     this.setState({ result: { isWindowActive: false, data: {} } })
   }
-
-  formSubmit = () => {
-    const { form } = this.state
-    this.openResultWindow(form.currency?.code, form.ratesNumber)
+  openResultWindow = async () => {
+    const { currency, ratesNumber } = this.state.form
+    try {
+      await this.fetchCurrencyData(currency.code, ratesNumber)
+      this.setState(prevState => {
+        return {
+          result: {
+            ...prevState.result,
+            isWindowActive: true,
+          },
+        }
+      })
+    } catch (err) {
+      return `Dane waluty ${currency.code} nie zostały znalezione`
+    }
   }
 
   render() {
@@ -51,7 +63,7 @@ class SearchView extends React.Component {
         <SearchForm
           handleCurrencyChange={this.setCurrency}
           handleRatesNumberChange={this.setRatesNumber}
-          submitFn={this.formSubmit}
+          openResultWindow={this.openResultWindow}
           {...form}
         />
         {result.isWindowActive && (
