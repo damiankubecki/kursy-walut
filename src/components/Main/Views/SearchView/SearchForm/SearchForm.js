@@ -10,12 +10,12 @@ class SearchForm extends React.Component {
     modal: { isActive: false, title: '', content: '' },
   }
 
-  openModal = ({ title, content }) => {
+  openModal = ({ title, text }) => {
     this.setState({
       modal: {
         isActive: true,
         title: title,
-        content: content,
+        text: text,
       },
     })
   }
@@ -28,20 +28,20 @@ class SearchForm extends React.Component {
     if (!currency && !ratesNumber) {
       return this.openModal({
         title: modalTitle,
-        content: 'Nie uzupełniono formularza',
+        text: 'Nie uzupełniono formularza',
       })
     }
     if (!currency) {
-      return this.openModal({ title: modalTitle, content: 'Nie wybrano waluty' })
+      return this.openModal({ title: modalTitle, text: 'Nie wybrano waluty' })
     }
     if (!ratesNumber) {
       return this.openModal({
         title: modalTitle,
-        content: 'Nie wpisano liczby ostatnich notowań',
+        text: 'Nie wpisano liczby ostatnich notowań',
       })
     }
     const error = await openResultWindow()
-    if (error) this.openModal({ title: modalTitle, content: error })
+    if (error) this.openModal({ title: modalTitle, text: error })
   }
 
   render() {
@@ -79,49 +79,10 @@ class SearchForm extends React.Component {
           <Button bigger>Szukaj</Button>
         </form>
         {modal.isActive && (
-          <Modal
-            title={modal.title}
-            content={modal.content}
-            onClose={this.closeModal}
-          />
+          <Modal title={modal.title} text={modal.text} onClose={this.closeModal} />
         )}
       </>
     )
   }
 }
 export default SearchForm
-
-// const SearchForm = ({
-//   currenciesData,
-//   ratesNumber,
-//   currency,
-//   handleCurrencyChange,
-//   handleRatesNumberChange,
-//   submitFn,
-// }) => {
-//   return (
-//     <form className={styles.wrapper} onSubmit={e => submitFn(e)}>
-//       <div className={styles.selectContainer}>
-//         <CurrenciesSelectList
-//           currenciesCollection={currenciesData}
-//           selectedCurrency={currency}
-//           onChange={e => handleCurrencyChange(e.target.value)}
-//         >
-//           Waluta:
-//         </CurrenciesSelectList>
-//       </div>
-//       <div className={styles.inputContainer}>
-//         <Input
-//           type={'number'}
-//           maxLength={2}
-//           defaultValue={ratesNumber}
-//           onChange={e => handleRatesNumberChange(e.target.value * 1)}
-//           onClear={() => handleRatesNumberChange(null)}
-//         >
-//           Ilość ostatnich notowań:
-//         </Input>
-//       </div>
-//       <Button bigger>Szukaj</Button>
-//     </form>
-//   )
-// }

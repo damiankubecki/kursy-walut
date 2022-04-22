@@ -53,7 +53,7 @@ const SearchResultWindow = ({
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.background}>
       <div className={styles.contentWrapper}>
         <p className={styles.title}>
           Wyniki ostatnich {rates.length} notowań dla waluty {currency} - {code}

@@ -30,7 +30,10 @@ class SearchView extends React.Component {
     })
   }
   fetchCurrencyData = async (currency, ratesNumber) => {
-    const lastCurrencyRates = await Data.getLastRatesOfCurrency(currency, ratesNumber)
+    const lastCurrencyRates = await Data.getLastRatesOfCurrency(
+      currency,
+      ratesNumber
+    )
     this.setState(prevState => {
       return { result: { ...prevState.result, data: { ...lastCurrencyRates } } }
     })
