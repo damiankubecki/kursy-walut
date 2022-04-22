@@ -65,7 +65,7 @@ const SearchResultWindow = ({
         )}
         <Line options={options} data={data} />
         <button className={styles.closeBtn} onClick={closeWindow}>
-          <i className="far fa-times-circle"></i>
+        <i className="fas fa-times"></i>
         </button>
       </div>
     </div>
