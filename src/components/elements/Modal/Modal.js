@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Modal.module.scss'
 
-const Modal = ({ title, text, onClose }) => {
+const Modal = ({ title, content, onClose }) => {
   return (
     <div className={styles.background}>
       <div className={styles.modal}>
@@ -13,7 +13,7 @@ const Modal = ({ title, text, onClose }) => {
             </div>
           </div>
           <div className={styles.rightSide}>
-            <p className={styles.text}> {text}</p>
+            <div className={styles.content}> {content}</div>
           </div>
         </div>
         <button className={styles.closeBtn} onClick={onClose}>

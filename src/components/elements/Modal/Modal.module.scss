@@ -18,7 +18,7 @@
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 500px;
+  width: 550px;
   min-height: 300px;
   border-radius: 25px;
   box-shadow: 9px 9px 20px 15px $darkBlackColor;
@@ -31,8 +31,8 @@
 
   .title {
     flex-basis: 100%;
-    padding: 10px 0 5px;
-    font-size: 2rem;
+    padding: 10px 50px 5px;
+    font-size: 1.8rem;
     color: $goldColor;
   }
 
@@ -70,11 +70,19 @@
     .rightSide {
       flex-basis: 70%;
 
-      .text {
+      .content {
         padding: 20px 30px;
         font-size: 1rem;
         color: $whiteColor;
         text-align: left;
+
+        li {
+          padding-bottom: 5px;
+        }
+
+        a {
+          color: $goldColor;
+        }
       }
     }
   }
