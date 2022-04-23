@@ -7,15 +7,14 @@ import Modal from '../../../../elements/Modal/Modal'
 
 class SearchForm extends React.Component {
   state = {
-    modal: { isActive: false, title: '', content: '' },
+    modal: { isActive: false, content: '' },
   }
 
-  openModal = ({ title, text }) => {
+  openModal = content => {
     this.setState({
       modal: {
         isActive: true,
-        title: title,
-        text: text,
+        content: content,
       },
     })
   }
@@ -24,24 +23,18 @@ class SearchForm extends React.Component {
     e.preventDefault()
 
     const { currency, ratesNumber, openResultWindow } = this.props
-    const modalTitle = 'Błąd'
+
     if (!currency && !ratesNumber) {
-      return this.openModal({
-        title: modalTitle,
-        text: 'Nie uzupełniono formularza',
-      })
+      return this.openModal(<p>Nie uzupełniono formularza</p>)
     }
     if (!currency) {
-      return this.openModal({ title: modalTitle, text: 'Nie wybrano waluty' })
+      return this.openModal(<p>Nie wybrano waluty</p>)
     }
     if (!ratesNumber) {
-      return this.openModal({
-        title: modalTitle,
-        text: 'Nie wpisano liczby ostatnich notowań',
-      })
+      return this.openModal(<p>Nie wpisano liczby ostatnich notowań</p>)
     }
     const error = await openResultWindow()
-    if (error) this.openModal({ title: modalTitle, text: error })
+    if (error) this.openModal(<p>{error}</p>)
   }
 
   render() {
@@ -79,7 +72,7 @@ class SearchForm extends React.Component {
           <Button bigger>Szukaj</Button>
         </form>
         {modal.isActive && (
-          <Modal title={modal.title} text={modal.text} onClose={this.closeModal} />
+          <Modal title={'Błąd'} content={modal.content} onClose={this.closeModal} />
         )}
       </>
     )
