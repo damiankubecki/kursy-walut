@@ -4,34 +4,34 @@ import CurrenciesSelectList from '../../../../../elements/CurrenciesSelectList/C
 import Buttons from './Buttons/Buttons'
 
 const ChooseCurrenciesSection = ({
-  convertFrom,
-  convertTo,
+  fromCurrency,
+  toCurrency,
   currenciesCollection,
-  changeSelectOptionFn,
-  switchConvertedCurrencies,
+  setCurrency,
+  switchSelectedCurrencies,
   resetSelectedCurrencies,
 }) => {
   return (
     <div className={styles.wrapper}>
       <CurrenciesSelectList
-        listName="convertFrom"
+        listName="fromCurrency"
         currenciesCollection={currenciesCollection}
-        selectedCurrency={convertFrom}
-        calculator={{ anotherSelectedCurrency: convertTo }}
-        onChange={changeSelectOptionFn}
+        selectedCurrencyCode={fromCurrency?.code}
+        calculator={{ anotherSelectedCurrency: toCurrency }}
+        onChange={setCurrency}
       >
         Mam
       </CurrenciesSelectList>
       <Buttons
-        switchFn={switchConvertedCurrencies}
+        switchFn={switchSelectedCurrencies}
         resetFn={resetSelectedCurrencies}
       />
       <CurrenciesSelectList
-        listName="convertTo"
+        listName="toCurrency"
         currenciesCollection={currenciesCollection}
-        selectedCurrency={convertTo}
-        calculator={{ anotherSelectedCurrency: convertFrom }}
-        onChange={changeSelectOptionFn}
+        selectedCurrencyCode={toCurrency?.code}
+        calculator={{ anotherSelectedCurrency: fromCurrency }}
+        onChange={setCurrency}
       >
         Chcę otrzymać
       </CurrenciesSelectList>

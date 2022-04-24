@@ -5,7 +5,7 @@ import styles from './CurrenciesSelectList.module.scss'
 const CurrenciesSelectList = ({
   listName,
   currenciesCollection,
-  selectedCurrency,
+  selectedCurrencyCode,
   children,
   calculator = {
     anotherSelectedCurrency: null,
@@ -20,16 +20,14 @@ const CurrenciesSelectList = ({
       <select
         className={styles.select}
         name={listName}
-        value={selectedCurrency ? selectedCurrency.code : 'default'}
+        value={selectedCurrencyCode || 'default'}
         {...props}
       >
         <option value="default">Wybierz walutę</option>
         {calculator ? (
           <>
             {currenciesCollection
-              .filter(
-                currency => currency !== anotherSelectedCurrency
-              )
+              .filter(currency => currency !== anotherSelectedCurrency)
               .map(currency => (
                 <option key={currency.code} value={currency.code}>
                   {currency.code} - {currency.country || currency.currency}

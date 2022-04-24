@@ -6,78 +6,78 @@ import Button from '../../../../elements/Button/Button'
 import { findCurrencyByCode } from '../../../../../assets/functions/findCurrencyByCode'
 import { calculatorViewConfig } from './../../../../../config'
 
+const { initialCurrencies } = calculatorViewConfig
+
 class CalcForm extends React.Component {
   state = {
     currenciesCollection: this.props.currenciesCollection,
-    convertFrom: '',
-    convertTo: '',
-    sum: 0,
-  }
-
-  componentDidMount() {
-    const { currenciesCollection } = this.state
-    const { initialCurrencies } = calculatorViewConfig
-    this.setState({
-      convertFrom: findCurrencyByCode(currenciesCollection, initialCurrencies.from),
-      convertTo: findCurrencyByCode(currenciesCollection, initialCurrencies.to),
-    })
+    fromCurrency: findCurrencyByCode(
+      this.props.currenciesCollection,
+      initialCurrencies.from
+    ),
+    toCurrency: findCurrencyByCode(
+      this.props.currenciesCollection,
+      initialCurrencies.to
+    ),
+    sum: null,
   }
 
   setSum = value => this.setState({ sum: value })
-  changeSelectOptionFn = e => {
+
+  setCurrency = e => {
+    if (!this.state.hasOwnProperty(e.target.name))
+      throw new Error(`Unknown '${e.target.name}' state property`)
+
     const { currenciesCollection } = this.state
     this.setState({
       [e.target.name]: findCurrencyByCode(currenciesCollection, e.target.value),
     })
   }
-  calculateResult = () => {
-    const { convertFrom, convertTo, sum } = this.state
+  resetSelectedCurrencies = e => {
+    e.preventDefault()
+    this.setState({ fromCurrency: null, toCurrency: null })
+  }
+  switchSelectedCurrencies = e => {
+    e.preventDefault()
+    const previousData = { ...this.state }
+    this.setState({
+      fromCurrency: previousData.toCurrency,
+      toCurrency: previousData.fromCurrency,
+    })
+  }
 
-    if (convertFrom && convertTo && sum) {
-      const exchangeRate = convertFrom.mid / convertTo.mid
-      const calcResult = sum * exchangeRate
-      this.props.setResult(
-        calcResult,
-        sum,
-        exchangeRate,
-        convertFrom.code,
-        convertTo.code
-      )
-      return true
-    }
-    return false
+  calculateResult = () => {
+    const { fromCurrency, toCurrency, sum } = this.state
+    if (!fromCurrency || !toCurrency || !sum)
+      throw new Error('Cannot calculate result')
+
+    const exchangeRate = fromCurrency.mid / toCurrency.mid
+    const calcResult = sum * exchangeRate
+    this.props.setResult(
+      calcResult,
+      sum,
+      exchangeRate,
+      fromCurrency.code,
+      toCurrency.code
+    )
   }
   showResult = e => {
     e.preventDefault()
-    if (this.calculateResult()) return this.props.setResultVisibility(true)
-    this.props.setResultVisibility(false)
-  }
-  switchConvertedCurrencies = e => {
-    e.preventDefault()
-    const oldData = {
-      convertFrom: this.state.convertFrom,
-      convertTo: this.state.convertTo,
-    }
-    this.setState({
-      convertFrom: oldData.convertTo,
-      convertTo: oldData.convertFrom,
-    })
-  }
-  resetSelectedCurrencies = e => {
-    e.preventDefault()
-    this.setState({ convertFrom: '', convertTo: '' })
+    this.calculateResult()
+    this.props.setResultVisibility(true)
   }
 
   render() {
+    const { fromCurrency } = this.state
     return (
       <form className={styles.wrapper}>
         <ChooseCurrenciesSection
-          changeSelectOptionFn={this.changeSelectOptionFn}
-          switchConvertedCurrencies={this.switchConvertedCurrencies}
+          setCurrency={this.setCurrency}
+          switchSelectedCurrencies={this.switchSelectedCurrencies}
           resetSelectedCurrencies={this.resetSelectedCurrencies}
           {...this.state}
         />
-        <SumSection convertFrom={this.state.convertFrom} setSum={this.setSum} />
+        <SumSection fromCurrency={fromCurrency} setSum={this.setSum} />
         <Button bigger margin="30px 0 0" onClick={this.showResult}>
           Przelicz
         </Button>

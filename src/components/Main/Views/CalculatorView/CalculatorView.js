@@ -47,7 +47,6 @@ class CalculatorView extends React.Component {
 
   render() {
     const { data, date } = this.props.currenciesData
-
     return (
       <div className={styles.wrapper}>
         <h2 className={styles.title}>Kalkulator</h2>

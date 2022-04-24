@@ -2,14 +2,14 @@ import React from 'react'
 import styles from './SumSection.module.scss'
 import Input from '../../../../../elements/Input/Input'
 
-const SumSection = ({ convertFrom, setSum }) => {
+const SumSection = ({ fromCurrency, setSum }) => {
   return (
     <div className={styles.wrapper}>
       <p className={styles.title}>Kwota:</p>
       <Input
         type={'number'}
         maxLength={8}
-        suffix={convertFrom.code || '???'}
+        suffix={fromCurrency?.code || '???'}
         placeholder={'Wpisz kwotę'}
         onChange={e => setSum(e.target.value * 1)}
       />
