@@ -52,7 +52,7 @@ class CalculatorView extends React.Component {
       <div className={styles.wrapper}>
         <h2 className={styles.title}>Kalkulator</h2>
         <CalcForm
-          currenciesData={[PLN, ...data]}
+          currenciesCollection={[PLN, ...data]}
           setResult={this.setResult}
           setResultVisibility={this.setResultVisibility}
         />

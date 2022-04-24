@@ -3,63 +3,31 @@ import styles from './CalcForm.module.scss'
 import ChooseCurrenciesSection from './ChooseCurrenciesSection/ChooseCurrenciesSection'
 import SumSection from './SumSection/SumSection'
 import Button from '../../../../elements/Button/Button'
+import { findCurrencyByCode } from '../../../../../assets/functions/findCurrencyByCode'
 import { calculatorViewConfig } from './../../../../../config'
 
 class CalcForm extends React.Component {
-  #currenciesData = this.props.currenciesData
-  #initialCurrencies = {
-    from: calculatorViewConfig.initialCurrencies.from,
-    to: calculatorViewConfig.initialCurrencies.to,
-  }
-
   state = {
+    currenciesCollection: this.props.currenciesCollection,
     convertFrom: '',
     convertTo: '',
-    currencies: [],
     sum: 0,
   }
 
   componentDidMount() {
+    const { currenciesCollection } = this.state
+    const { initialCurrencies } = calculatorViewConfig
     this.setState({
-      convertFrom: this.#currenciesData.find(
-        currency => currency.code === this.#initialCurrencies.from
-      ),
-      convertTo: this.#currenciesData.find(
-        currency => currency.code === this.#initialCurrencies.to
-      ),
-      currencies: this.#currenciesData.map(currency => {
-        const { from, to } = this.#initialCurrencies
-        if (currency.code === from || to) {
-          currency.used = true
-        }
-        return currency
-      }),
+      convertFrom: findCurrencyByCode(currenciesCollection, initialCurrencies.from),
+      convertTo: findCurrencyByCode(currenciesCollection, initialCurrencies.to),
     })
   }
 
   setSum = value => this.setState({ sum: value })
   changeSelectOptionFn = e => {
-    const { currencies, convertFrom, convertTo } = this.state
-
+    const { currenciesCollection } = this.state
     this.setState({
-      [e.target.name]: currencies.find(currency => currency.code === e.target.value),
-    })
-
-    currencies.forEach(currency => {
-      if (currency !== convertFrom && currency !== convertTo)
-        return (currency.used = false)
-    })
-    const currentCurency = currencies.find(
-      currency => currency.code === e.target.value
-    )
-    if (currentCurency) {
-      currentCurency.used = true
-    }
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        currencies: currencies,
-      }
+      [e.target.name]: findCurrencyByCode(currenciesCollection, e.target.value),
     })
   }
   calculateResult = () => {

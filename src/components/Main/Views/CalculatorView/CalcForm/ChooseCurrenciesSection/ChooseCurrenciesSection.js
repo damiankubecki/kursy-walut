@@ -6,7 +6,7 @@ import Buttons from './Buttons/Buttons'
 const ChooseCurrenciesSection = ({
   convertFrom,
   convertTo,
-  currencies,
+  currenciesCollection,
   changeSelectOptionFn,
   switchConvertedCurrencies,
   resetSelectedCurrencies,
@@ -15,7 +15,7 @@ const ChooseCurrenciesSection = ({
     <div className={styles.wrapper}>
       <CurrenciesSelectList
         listName="convertFrom"
-        currenciesCollection={currencies}
+        currenciesCollection={currenciesCollection}
         selectedCurrency={convertFrom}
         calculator={{ anotherSelectedCurrency: convertTo }}
         onChange={changeSelectOptionFn}
@@ -28,7 +28,7 @@ const ChooseCurrenciesSection = ({
       />
       <CurrenciesSelectList
         listName="convertTo"
-        currenciesCollection={currencies}
+        currenciesCollection={currenciesCollection}
         selectedCurrency={convertTo}
         calculator={{ anotherSelectedCurrency: convertFrom }}
         onChange={changeSelectOptionFn}

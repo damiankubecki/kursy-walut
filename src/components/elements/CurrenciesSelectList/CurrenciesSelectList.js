@@ -28,7 +28,7 @@ const CurrenciesSelectList = ({
           <>
             {currenciesCollection
               .filter(
-                currency => !currency.used || currency !== anotherSelectedCurrency
+                currency => currency !== anotherSelectedCurrency
               )
               .map(currency => (
                 <option key={currency.code} value={currency.code}>
