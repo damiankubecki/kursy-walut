@@ -47,8 +47,11 @@ class CalcForm extends React.Component {
 
   submit = e => {
     e.preventDefault()
-    const { setFormInfos, setResult } = this.props
+    const { setFormInfos, setResult, clearResult, openModal } = this.props
+    clearResult()
+
     const result = calculateResult(this.state)
+    if (result.error) return openModal(<p>{result.error}</p>)
 
     setFormInfos(this.state)
     setResult(result.exchangeRate, result.resultValue)
