@@ -62,7 +62,10 @@ class SearchForm extends React.Component {
             <Input
               type={'number'}
               maxLength={2}
+              step={1}
+              max={99}
               defaultValue={ratesNumber}
+              width="75px"
               onChange={e => handleRatesNumberChange(e.target.value * 1)}
               onClear={() => handleRatesNumberChange(null)}
             >

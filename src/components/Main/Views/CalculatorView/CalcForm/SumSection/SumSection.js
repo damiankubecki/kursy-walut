@@ -9,6 +9,8 @@ const SumSection = ({ fromCurrencyCode, setSum, clearSum }) => {
       <Input
         type={'number'}
         maxLength={8}
+        step={0.01}
+        max={999999999}
         suffix={fromCurrencyCode || '???'}
         placeholder={'Wpisz kwotę'}
         onChange={e => setSum(e.target.value * 1)}

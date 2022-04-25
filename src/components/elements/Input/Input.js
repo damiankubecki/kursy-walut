@@ -2,40 +2,27 @@ import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import styles from './Input.module.scss'
 
-const Input = ({ suffix, maxLength, children, onClear, ...props }) => {
+const Input = ({ suffix, width, children, onClear, ...props }) => {
   const input = useRef(null)
-  const clearInputValue = () => (input.current.value = '')
-  const checkInputLength = e => {
-    e.target.value = e.target.value.slice(0, maxLength)
+  const onClickClearBtn = () => {
+    input.current.value = ''
+    if (typeof onClear === 'function') onClear()
   }
 
+  const inputStyle = {
+    width: width,
+    paddingLeft: '30px',
+    paddingRight: suffix ? `${suffix.length * 16 + 5}px` : '10px',
+  }
   return (
     <div className={styles.wrapper}>
       {children && <p className={styles.title}>{children}</p>}
       <div className={styles.inputContainer}>
-        <input
-          className={styles.input}
-          ref={input}
-          style={{
-            width: maxLength
-              ? `${maxLength * 12 + 47.5 + (suffix ? suffix.length * 16 : 0)}px`
-              : '200px',
-            paddingRight: suffix ? `${suffix.length * 16 + 5}px` : '10px',
-          }}
-          maxLength={maxLength}
-          onInput={e => checkInputLength(e)}
-          {...props}
-        />
+        <input className={styles.input} ref={input} style={inputStyle} {...props} />
         {suffix && <p className={styles.suffix}>{suffix.toUpperCase()}</p>}
-        <div
-          className={styles.clearBtn}
-          onClick={() => {
-            clearInputValue()
-            if (typeof onClear === 'function') onClear()
-          }}
-        >
+        <button className={styles.clearBtn} type="button" onClick={onClickClearBtn}>
           <i className="fa-solid fa-xmark"></i>
-        </div>
+        </button>
       </div>
     </div>
   )

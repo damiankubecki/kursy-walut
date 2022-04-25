@@ -47,6 +47,9 @@
       top: 50%;
       transform: translateY(-50%);
       color: $darkBlackColor;
+      background-color: transparent;
+      border: none;
+      font-size: 1.15rem;
       cursor: pointer;
 
       &:hover {
