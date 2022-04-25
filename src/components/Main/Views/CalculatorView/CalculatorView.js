@@ -47,6 +47,7 @@ class CalculatorView extends React.Component {
 
   render() {
     const { data, date } = this.props.currenciesData
+    const { result, showResult } = this.state
     return (
       <div className={styles.wrapper}>
         <h2 className={styles.title}>Kalkulator</h2>
@@ -55,11 +56,7 @@ class CalculatorView extends React.Component {
           setResult={this.setResult}
           setResultVisibility={this.setResultVisibility}
         />
-        <CalcResult
-          showResult={this.state.showResult}
-          result={this.state.result}
-          rateDate={date}
-        />
+        <CalcResult showResult={showResult} result={result} rateDate={date} />
       </div>
     )
   }

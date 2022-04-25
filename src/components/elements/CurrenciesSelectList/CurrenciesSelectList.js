@@ -7,13 +7,10 @@ const CurrenciesSelectList = ({
   currenciesCollection,
   selectedCurrencyCode,
   children,
-  calculator = {
-    anotherSelectedCurrency: null,
-  },
+  anotherSelectedCurrency,
   ...props
 }) => {
   currenciesCollection.sort((a, b) => a.category - b.category)
-  const { anotherSelectedCurrency } = calculator
   return (
     <div className={styles.wrapper}>
       {children && <p className={styles.title}>{children}</p>}
@@ -24,7 +21,7 @@ const CurrenciesSelectList = ({
         {...props}
       >
         <option value="default">Wybierz walutę</option>
-        {calculator ? (
+        {anotherSelectedCurrency ? (
           <>
             {currenciesCollection
               .filter(currency => currency !== anotherSelectedCurrency)
@@ -51,7 +48,7 @@ const CurrenciesSelectList = ({
 CurrenciesSelectList.propTypes = {
   listName: PropTypes.string,
   currenciesCollection: PropTypes.array.isRequired,
-  select: PropTypes.func,
+  selectedCurrencyCode: PropTypes.string,
   children: PropTypes.string,
   calculator: PropTypes.object,
 }

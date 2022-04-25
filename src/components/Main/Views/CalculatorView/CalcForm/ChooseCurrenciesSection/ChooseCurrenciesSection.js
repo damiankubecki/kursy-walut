@@ -9,7 +9,7 @@ const ChooseCurrenciesSection = ({
   currenciesCollection,
   setCurrency,
   switchSelectedCurrencies,
-  resetSelectedCurrencies,
+  clearSelectedCurrencies,
 }) => {
   return (
     <div className={styles.wrapper}>
@@ -17,20 +17,20 @@ const ChooseCurrenciesSection = ({
         listName="fromCurrency"
         currenciesCollection={currenciesCollection}
         selectedCurrencyCode={fromCurrency?.code}
-        calculator={{ anotherSelectedCurrency: toCurrency }}
+        anotherSelectedCurrency={toCurrency}
         onChange={setCurrency}
       >
         Mam
       </CurrenciesSelectList>
       <Buttons
         switchFn={switchSelectedCurrencies}
-        resetFn={resetSelectedCurrencies}
+        resetFn={clearSelectedCurrencies}
       />
       <CurrenciesSelectList
         listName="toCurrency"
         currenciesCollection={currenciesCollection}
         selectedCurrencyCode={toCurrency?.code}
-        calculator={{ anotherSelectedCurrency: fromCurrency }}
+        anotherSelectedCurrency={fromCurrency}
         onChange={setCurrency}
       >
         Chcę otrzymać

@@ -23,6 +23,7 @@ class CalcForm extends React.Component {
   }
 
   setSum = value => this.setState({ sum: value })
+  clearSum = () => this.setState({ sum: null })
 
   setCurrency = e => {
     if (!this.state.hasOwnProperty(e.target.name))
@@ -33,7 +34,7 @@ class CalcForm extends React.Component {
       [e.target.name]: findCurrencyByCode(currenciesCollection, e.target.value),
     })
   }
-  resetSelectedCurrencies = e => {
+  clearSelectedCurrencies = e => {
     e.preventDefault()
     this.setState({ fromCurrency: null, toCurrency: null })
   }
@@ -51,15 +52,10 @@ class CalcForm extends React.Component {
     if (!fromCurrency || !toCurrency || !sum)
       throw new Error('Cannot calculate result')
 
+    const { setResult } = this.props
     const exchangeRate = fromCurrency.mid / toCurrency.mid
     const calcResult = sum * exchangeRate
-    this.props.setResult(
-      calcResult,
-      sum,
-      exchangeRate,
-      fromCurrency.code,
-      toCurrency.code
-    )
+    setResult(calcResult, sum, exchangeRate, fromCurrency.code, toCurrency.code)
   }
   showResult = e => {
     e.preventDefault()
@@ -70,15 +66,19 @@ class CalcForm extends React.Component {
   render() {
     const { fromCurrency } = this.state
     return (
-      <form className={styles.wrapper}>
+      <form className={styles.wrapper} onSubmit={this.showResult}>
         <ChooseCurrenciesSection
           setCurrency={this.setCurrency}
           switchSelectedCurrencies={this.switchSelectedCurrencies}
-          resetSelectedCurrencies={this.resetSelectedCurrencies}
+          clearSelectedCurrencies={this.clearSelectedCurrencies}
           {...this.state}
         />
-        <SumSection fromCurrency={fromCurrency} setSum={this.setSum} />
-        <Button bigger margin="30px 0 0" onClick={this.showResult}>
+        <SumSection
+          fromCurrencyCode={fromCurrency?.code}
+          setSum={this.setSum}
+          clearSum={this.clearSum}
+        />
+        <Button bigger margin="30px 0 0">
           Przelicz
         </Button>
       </form>

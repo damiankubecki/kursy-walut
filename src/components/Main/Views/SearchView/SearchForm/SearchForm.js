@@ -52,7 +52,7 @@ class SearchForm extends React.Component {
           <div className={styles.selectContainer}>
             <CurrenciesSelectList
               currenciesCollection={currenciesCollection}
-              selectedCurrency={currency}
+              selectedCurrencyCode={currency?.code}
               onChange={e => handleCurrencyChange(e.target.value)}
             >
               Waluta:
