@@ -4,12 +4,12 @@ import CurrenciesList from './CurrenciesList/CurrenciesList'
 
 const HomeView = ({ currenciesData }) => {
   const effectiveDate = currenciesData.date
-  const currenciesList = currenciesData.data
+  const currenciesCollection = currenciesData.data
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.title}>Dane walut</h2>
       <p className={styles.effectiveDate}>średnie kursy z dnia: {effectiveDate}</p>
-      <CurrenciesList currencies={currenciesList} />
+      <CurrenciesList currenciesCollection={currenciesCollection} />
     </div>
   )
 }

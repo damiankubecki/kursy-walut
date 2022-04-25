@@ -2,13 +2,13 @@ import React from 'react'
 import styles from './CurrenciesList.module.scss'
 import CurrencyItem from './CurrencyItem/CurrencyItem'
 
-const CurrenciesList = ({ currencies }) => {
-  currencies = currencies
-    ? currencies.sort((a, b) => (a.category > b.category ? 1 : -1))
-    : null
+const CurrenciesList = ({ currenciesCollection }) => {
+  const sortedCurrencies = currenciesCollection.sort((a, b) =>
+    a.category > b.category ? 1 : -1
+  )
   return (
     <div className={styles.wrapper}>
-      {currencies.map(currency => {
+      {sortedCurrencies.map(currency => {
         return <CurrencyItem key={currency.code} {...currency} />
       })}
     </div>

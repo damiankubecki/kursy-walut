@@ -15,7 +15,7 @@ class CurrencyItem extends React.Component {
 
   render() {
     const { isModalActive } = this.state
-    const { currency, code, country, mid, flag, wikipediaLink } = this.props
+    const { currency, code, symbol, country, mid, flag, wikipediaLink } = this.props
 
     const modalTitle = `Informacje o ${currency}`
     const modalContent = (
@@ -30,7 +30,9 @@ class CurrencyItem extends React.Component {
         )}
         <ul style={{ listStyle: 'none' }}>
           <li>Kod waluty: {code}</li>
+          {symbol && <li>Symbol: {symbol}</li>}
           <li>Kraj/strefa: {country}</li>
+
           <li>Akutalny kurs: {mid}</li>
           {wikipediaLink && (
             <li>
