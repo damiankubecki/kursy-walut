@@ -4,10 +4,10 @@ import Button from '../../../../../../elements/Button/Button'
 
 const Buttons = ({ switchFn, resetFn }) => (
   <div className={styles.wrapper}>
-    <Button noBorder margin="3px" onClick={e => resetFn(e)}>
+    <Button noBorder margin="3px" type="button" onClick={resetFn}>
       <i className="fa-solid fa-xmark"></i>
     </Button>
-    <Button noBorder bigger margin="3px" onClick={e => switchFn(e)}>
+    <Button noBorder bigger margin="3px" type="button" onClick={switchFn}>
       <i className="fa-solid fa-right-left"></i>
     </Button>
   </div>

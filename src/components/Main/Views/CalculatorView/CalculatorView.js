@@ -1,62 +1,61 @@
 import React from 'react'
 import styles from './CalculatorView.module.scss'
+import {
+  convertSum,
+  convertResult,
+  convertExchangeRate,
+} from '../../../../assets/functions/convertedValues'
 import CalcForm from './CalcForm/CalcForm'
 import CalcResult from './CalcResult/CalcResult'
 import { PLN } from './../../../../config'
 
 class CalculatorView extends React.Component {
   state = {
-    result: {
-      amount: 0,
-      exchangeRate: 0,
-      from: {
-        sum: 0,
-        fromCurrency: '',
-      },
-      to: '',
+    form: {
+      fromCurrency: null,
+      toCurrency: null,
+      sum: null,
     },
-    showResult: false,
+    result: {
+      exchangeRate: null,
+      resultValue: null,
+    },
   }
 
-  setResultVisibility = value => this.setState({ showResult: value })
-  setResult = (calcResult, sum, exchangeRate, fromCurrency, toCurrency) => {
+  setFormInfos = ({ fromCurrency, toCurrency, sum }) => {
+    if (!fromCurrency || !toCurrency || !sum) throw new Error('Uncomplete data')
+
     this.setState({
-      result: {
-        amount: this.getConvertedValue(calcResult),
-        exchangeRate: exchangeRate.toFixed(4).toString().replace('.', ','),
-        from: {
-          sum: this.getConvertedValue(sum),
-          fromCurrency: fromCurrency,
-        },
-        to: toCurrency,
+      form: {
+        fromCurrency: fromCurrency,
+        toCurrency: toCurrency,
+        sum: convertSum(sum),
       },
     })
   }
-  getConvertedValue = value => {
-    value = value.toFixed(2).toString().replace('.', ',')
-    let valueLength = value.length - 3
-    let loops = 1
-    while (valueLength / 3 >= 1) {
-      value = value.split('').reverse()
-      value.splice(4 * loops++ + 2, 0, ' ').reverse()
-      value = value.reverse().join('')
-      valueLength -= 3
-    }
-    return value
+  setResult = (exchangeRate, resultValue) => {
+    if (!exchangeRate || !resultValue) throw new Error('Uncomplete data')
+
+    this.setState({
+      result: {
+        exchangeRate: convertExchangeRate(exchangeRate),
+        resultValue: convertResult(resultValue),
+      },
+    })
   }
 
   render() {
     const { data, date } = this.props.currenciesData
-    const { result, showResult } = this.state
+    const { form, result } = this.state
     return (
       <div className={styles.wrapper}>
         <h2 className={styles.title}>Kalkulator</h2>
         <CalcForm
           currenciesCollection={[PLN, ...data]}
           setResult={this.setResult}
-          setResultVisibility={this.setResultVisibility}
+          setFormInfos={this.setFormInfos}
         />
-        <CalcResult showResult={showResult} result={result} rateDate={date} />
+        {result.resultValue && <CalcResult rateDate={date} {...form} {...result} />}
       </div>
     )
   }
