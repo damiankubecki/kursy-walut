@@ -6,7 +6,6 @@ import HomeView from './Views/HomeView/HomeView'
 import SearchView from './Views/SearchView/SearchView'
 import CalculatorView from './Views/CalculatorView/CalculatorView'
 import CuriositesView from './Views/CuriositesView/CuriositesView'
-import InfoView from './Views/InfoView/InfoView'
 
 class Main extends React.Component {
   state = {
@@ -53,7 +52,6 @@ class Main extends React.Component {
               element={<CalculatorView currenciesData={currenciesData} />}
             />
             <Route path="/curiosites" element={<CuriositesView />} />
-            <Route path="/info" element={<InfoView />} />
           </Routes>
         )}
       </div>

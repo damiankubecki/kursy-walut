@@ -28,14 +28,6 @@ const Navigation = () => (
     >
       <i className="far fa-lightbulb"></i>
     </NavLink>
-    <NavLink
-      to="/info"
-      className={({ isActive }) =>
-        isActive ? styles.navItemActive : styles.navItem
-      }
-    >
-      <i className="fas fa-info-circle"></i>
-    </NavLink>
   </nav>
 )
 
