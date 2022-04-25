@@ -3,13 +3,17 @@ import styles from './SearchView.module.scss'
 import SearchForm from './SearchForm/SearchForm'
 import SearchResultWindow from './SearchResultWindow/SearchResultWindow'
 import Data from '../../../../assets/data/fetchData'
+import { findCurrencyByCode } from '../../../../assets/functions/findCurrencyByCode'
+import { searchViewConfig } from './../../../../config'
+
+const { initialCurrencyCode, initialRatesNumber } = searchViewConfig
 
 class SearchView extends React.Component {
   state = {
     form: {
       currenciesCollection: this.props.currenciesData,
-      currency: this.props.currenciesData.find(currency => currency.code === 'USD'),
-      ratesNumber: 10,
+      currency: findCurrencyByCode(this.props.currenciesData, initialCurrencyCode),
+      ratesNumber: initialRatesNumber,
     },
     result: {
       isWindowActive: false,

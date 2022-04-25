@@ -7,17 +7,17 @@ import Button from '../../../../elements/Button/Button'
 import { findCurrencyByCode } from '../../../../../assets/functions/findCurrencyByCode'
 import { calculatorViewConfig } from './../../../../../config'
 
-const { initialCurrencies } = calculatorViewConfig
+const { initialCurrenciesCodes } = calculatorViewConfig
 
 class CalcForm extends React.Component {
   state = {
     fromCurrency: findCurrencyByCode(
       this.props.currenciesCollection,
-      initialCurrencies.from
+      initialCurrenciesCodes.from
     ),
     toCurrency: findCurrencyByCode(
       this.props.currenciesCollection,
-      initialCurrencies.to
+      initialCurrenciesCodes.to
     ),
     sum: null,
   }

@@ -1,5 +1,9 @@
+const searchViewConfig = {
+  initialCurrencyCode: null,
+  initialRatesNumber: 10,
+}
 const calculatorViewConfig = {
-  initialCurrencies: { from: 'PLN', to: 'EUR' },
+  initialCurrenciesCodes: { from: 'PLN', to: 'EUR' },
 }
 const curiositesViewConfig = {
   collection: [
@@ -14,4 +18,4 @@ const curiositesViewConfig = {
 }
 const PLN = { code: 'PLN', mid: 1, currency: 'polski złoty', country: 'Polska' }
 
-export { calculatorViewConfig, curiositesViewConfig, PLN }
+export { searchViewConfig, calculatorViewConfig, curiositesViewConfig, PLN }
