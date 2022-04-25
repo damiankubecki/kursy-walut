@@ -7,8 +7,8 @@ const HomeView = ({ currenciesData }) => {
   const currenciesList = currenciesData.data
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.title}>Aktualne kursy</h2>
-      <p className={styles.effectiveDate}>Dane z dnia: {effectiveDate}</p>
+      <h2 className={styles.title}>Dane walut</h2>
+      <p className={styles.effectiveDate}>średnie kursy z dnia: {effectiveDate}</p>
       <CurrenciesList currencies={currenciesList} />
     </div>
   )

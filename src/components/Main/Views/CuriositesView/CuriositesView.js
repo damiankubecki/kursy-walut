@@ -9,10 +9,18 @@ class CuriositesView extends React.Component {
     currentCuriosityIndex: 0,
     currentText: '',
     isWriting: false,
+    componentWillUnmount: false,
   }
 
   componentDidMount() {
     this.writeSentence()
+  }
+  componentWillUnmount() {
+    for (let i = setTimeout(function () {}, 0); i > 0; i--) {
+      window.clearInterval(i)
+      window.clearTimeout(i)
+      if (window.cancelAnimationFrame) window.cancelAnimationFrame(i)
+    }
   }
 
   writeSentence = () => {
@@ -52,14 +60,17 @@ class CuriositesView extends React.Component {
   }
 
   render() {
+    const { currentText } = this.state
     return (
       <div className={styles.wrapper}>
         <h2 className={styles.title}>Ciekawostki</h2>
         <p className={styles.curiosity}>
-          {this.state.currentText}
+          {currentText}
           <span>|</span>
         </p>
-        <Button onClick={this.writeSentence}>Nowa ciekawostka</Button>
+        <Button bigger onClick={this.writeSentence}>
+          Nowa ciekawostka
+        </Button>
       </div>
     )
   }

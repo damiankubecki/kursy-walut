@@ -8,11 +8,9 @@ const CurrenciesList = ({ currencies }) => {
     : null
   return (
     <div className={styles.wrapper}>
-      {currencies
-        ? currencies.map(currency => {
-            return <CurrencyItem key={currency.code} {...currency} />
-          })
-        : null}
+      {currencies.map(currency => {
+        return <CurrencyItem key={currency.code} {...currency} />
+      })}
     </div>
   )
 }
