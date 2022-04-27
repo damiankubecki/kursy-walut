@@ -9,74 +9,70 @@ import { searchViewConfig } from './../../../../config'
 const { initialCurrencyCode, initialRatesNumber } = searchViewConfig
 
 class SearchView extends React.Component {
+  currenciesCollection = this.props.currenciesCollection
+
   state = {
     form: {
-      currenciesCollection: this.props.currenciesData,
-      currency: findCurrencyByCode(this.props.currenciesData, initialCurrencyCode),
+      selectedCurrency: findCurrencyByCode(
+        this.currenciesCollection,
+        initialCurrencyCode
+      ),
       ratesNumber: initialRatesNumber,
     },
-    result: {
-      isWindowActive: false,
-      data: {},
-    },
+    resultData: {},
   }
 
   setCurrency = currencyCode => {
-    const currencies = this.state.form.currenciesCollection
-    const currency = currencies.find(currency => currency.code === currencyCode)
+    const currency = this.currenciesCollection.find(
+      currency => currency.code === currencyCode
+    )
     this.setState(prevState => {
-      return { form: { ...prevState.form, currency: currency } }
+      return { form: { ...prevState.form, selectedCurrency: currency } }
     })
   }
+
   setRatesNumber = number => {
     this.setState(prevState => {
       return { form: { ...prevState.form, ratesNumber: number } }
     })
   }
-  fetchCurrencyData = async (currency, ratesNumber) => {
+
+  setResultData = async (currency, ratesNumber) => {
     const lastCurrencyRates = await Data.getLastRatesOfCurrency(
-      currency,
+      currency.code,
       ratesNumber
     )
-    this.setState(prevState => {
-      return { result: { ...prevState.result, data: { ...lastCurrencyRates } } }
-    })
+    this.setState({ resultData: { ...currency, rates: lastCurrencyRates } })
   }
-  closeResultWindow = () => {
-    this.setState({ result: { isWindowActive: false, data: {} } })
-  }
-  openResultWindow = async () => {
-    const { currency, ratesNumber } = this.state.form
+
+  isResultWindowActive = () => Object.keys(this.state.resultData).length
+  closeResultWindow = () => this.setState({ resultData: {} })
+
+  submitForm = async () => {
+    const { selectedCurrency, ratesNumber } = this.state.form
     try {
-      await this.fetchCurrencyData(currency.code, ratesNumber)
-      this.setState(prevState => {
-        return {
-          result: {
-            ...prevState.result,
-            isWindowActive: true,
-          },
-        }
-      })
+      await this.setResultData(selectedCurrency, ratesNumber)
     } catch (err) {
-      return `Dane waluty ${currency.code} nie zostały znalezione`
+      return `Dane waluty ${selectedCurrency.code} nie zostały znalezione`
     }
   }
 
   render() {
-    const { form, result } = this.state
+    const { form, resultData } = this.state
     return (
       <div className={styles.wrapper}>
         <h2 className={styles.title}>Szukaj waluty</h2>
         <SearchForm
+          currenciesCollection={this.currenciesCollection}
           handleCurrencyChange={this.setCurrency}
           handleRatesNumberChange={this.setRatesNumber}
-          openResultWindow={this.openResultWindow}
+          submitForm={this.submitForm}
           {...form}
         />
-        {result.isWindowActive && (
+        {this.isResultWindowActive() && (
           <SearchResultWindow
-            closeWindow={this.closeResultWindow}
-            {...result.data}
+            closeWindowFn={this.closeResultWindow}
+            {...resultData}
           />
         )}
       </div>

@@ -45,7 +45,7 @@ class Main extends React.Component {
             <Route
               exact
               path="/search"
-              element={<SearchView currenciesData={currenciesData.data} />}
+              element={<SearchView currenciesCollection={currenciesData.data} />}
             />
             <Route
               path="/calculator"

@@ -7,7 +7,10 @@ import Modal from '../../../../elements/Modal/Modal'
 
 class SearchForm extends React.Component {
   state = {
-    modal: { isActive: false, content: '' },
+    modal: {
+      isActive: false,
+      content: '',
+    },
   }
 
   openModal = content => {
@@ -19,21 +22,22 @@ class SearchForm extends React.Component {
     })
   }
   closeModal = () => this.setState({ modal: { isActive: false } })
+  
   submit = async e => {
     e.preventDefault()
 
-    const { currency, ratesNumber, openResultWindow } = this.props
+    const { selectedCurrency, ratesNumber, submitForm } = this.props
 
-    if (!currency && !ratesNumber) {
+    if (!selectedCurrency && !ratesNumber) {
       return this.openModal(<p>Nie uzupełniono formularza</p>)
     }
-    if (!currency) {
+    if (!selectedCurrency) {
       return this.openModal(<p>Nie wybrano waluty</p>)
     }
     if (!ratesNumber) {
       return this.openModal(<p>Nie wpisano liczby ostatnich notowań</p>)
     }
-    const error = await openResultWindow()
+    const error = await submitForm()
     if (error) this.openModal(<p>{error}</p>)
   }
 
@@ -41,18 +45,18 @@ class SearchForm extends React.Component {
     const {
       currenciesCollection,
       ratesNumber,
-      currency,
+      selectedCurrency,
       handleCurrencyChange,
       handleRatesNumberChange,
     } = this.props
     const { modal } = this.state
     return (
       <>
-        <form className={styles.wrapper} onSubmit={e => this.submit(e)}>
+        <form className={styles.wrapper} onSubmit={this.submit}>
           <div className={styles.selectContainer}>
             <CurrenciesSelectList
               currenciesCollection={currenciesCollection}
-              selectedCurrencyCode={currency?.code}
+              selectedCurrencyCode={selectedCurrency?.code}
               onChange={e => handleCurrencyChange(e.target.value)}
             >
               Waluta:
@@ -63,6 +67,7 @@ class SearchForm extends React.Component {
               type={'number'}
               maxLength={2}
               step={1}
+              min={3}
               max={99}
               defaultValue={ratesNumber}
               width="75px"

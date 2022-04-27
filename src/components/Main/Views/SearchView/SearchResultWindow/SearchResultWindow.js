@@ -16,12 +16,12 @@ import variables from './../../../../../assets/variables.scss'
 const { goldColor, goldRGBAColor } = variables
 
 const SearchResultWindow = ({
-  closeWindow,
+  closeWindowFn,
   code,
   currency,
   flag,
-  rates,
   wikipediaLink,
+  rates,
 }) => {
   ChartJS.register(
     CategoryScale,
@@ -64,8 +64,8 @@ const SearchResultWindow = ({
           </a>
         )}
         <Line options={options} data={data} />
-        <button className={styles.closeBtn} onClick={closeWindow}>
-        <i className="fas fa-times"></i>
+        <button className={styles.closeBtn} onClick={closeWindowFn}>
+          <i className="fas fa-times"></i>
         </button>
       </div>
     </div>

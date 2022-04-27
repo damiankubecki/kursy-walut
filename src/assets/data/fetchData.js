@@ -35,16 +35,14 @@ export default class Data {
           `https://api.nbp.pl/api/exchangerates/rates/a/${currencyCode}/last/${lastRatesNumber}/`
         )
         .then(res => {
-          resolve({
-            currency: res.data.currency,
-            ...currenciesInfo.find(currency => currency.code === res.data.code),
-            rates: [...res.data.rates].map(rate => {
+          resolve(
+            [...res.data.rates].map(rate => {
               return {
                 date: rate.effectiveDate,
                 mid: rate.mid,
               }
-            }),
-          })
+            })
+          )
         })
         .catch(() => {
           reject()
