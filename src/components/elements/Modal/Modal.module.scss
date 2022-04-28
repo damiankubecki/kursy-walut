@@ -127,7 +127,8 @@
 @media (max-width: $breakpoint-large_phone) {
   .modal {
     width: 80vw;
-    min-height: 150px;
+    min-height: 125px;
+    box-shadow: 4px 4px 10px 5px $darkBlackColor;
 
     .modalContent {
       flex-direction: column;
@@ -135,13 +136,13 @@
       .leftSide {
         order: 1;
         display: block;
-        line-height: 35px;
-        flex-basis: 35px;
+        line-height: 30px;
+        flex-basis: 30px;
         border: none;
         border-top: 2px solid rgba($color: $whiteColor, $alpha: 0.15);
 
         &TextContainer {
-          transform: rotate(-2deg);
+          transform: none;
         }
 
         &Text {

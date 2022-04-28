@@ -77,7 +77,7 @@ class SearchForm extends React.Component {
               Ilość ostatnich notowań:
             </Input>
           </div>
-          <Button bigger>Szukaj</Button>
+          <Button>Szukaj</Button>
         </form>
         {modal.isActive && (
           <Modal title={'Błąd'} content={modal.content} onClose={this.closeModal} />

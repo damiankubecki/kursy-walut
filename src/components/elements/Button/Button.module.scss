@@ -6,7 +6,7 @@
   border-radius: $borderRadius;
   padding: 3px 20px 3px 15px;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: $goldColor;
   background-color: $darkBlackColor;
   cursor: pointer;
@@ -14,5 +14,11 @@
 
   &:hover {
     transform: scale(1.1);
+  }
+}
+
+@media (max-width: $breakpoint-large_phone) {
+  .btn {
+    font-size: 1.6rem;
   }
 }

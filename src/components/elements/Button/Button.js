@@ -1,9 +1,8 @@
 import React from 'react'
 import styles from './Button.module.scss'
 
-const Button = ({ href, bigger, noBorder, margin, children, ...props }) => {
+const Button = ({ href, noBorder, margin, children, ...props }) => {
   const border = noBorder ? 'none' : '2px solid'
-  const fontSize = bigger ? '1.3rem' : '1rem'
   return (
     <>
       {href ? (
@@ -13,7 +12,6 @@ const Button = ({ href, bigger, noBorder, margin, children, ...props }) => {
           style={{
             borderBottom: border,
             margin: margin,
-            fontSize: fontSize,
           }}
           {...props}
         >
@@ -25,7 +23,6 @@ const Button = ({ href, bigger, noBorder, margin, children, ...props }) => {
           style={{
             borderBottom: border,
             margin: margin,
-            fontSize: fontSize,
           }}
           {...props}
         >

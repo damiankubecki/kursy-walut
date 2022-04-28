@@ -27,3 +27,12 @@
     }
   }
 }
+
+@media (max-width: $breakpoint-large_phone) {
+  .wrapper {
+    .select {
+      width: 250px;
+      font-size: 1.2rem;
+    }
+  }
+}

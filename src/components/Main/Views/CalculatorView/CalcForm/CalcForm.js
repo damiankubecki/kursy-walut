@@ -74,7 +74,7 @@ class CalcForm extends React.Component {
           setSum={this.setSum}
           clearSum={this.clearSum}
         />
-        <Button bigger margin="30px 0 0" type="submit">
+        <Button margin="30px 0 0" type="submit">
           Przelicz
         </Button>
       </form>

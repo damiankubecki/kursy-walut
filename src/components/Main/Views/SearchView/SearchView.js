@@ -46,7 +46,7 @@ class SearchView extends React.Component {
     this.setState({ resultData: { ...currency, rates: lastCurrencyRates } })
   }
 
-  isResultWindowActive = () => Object.keys(this.state.resultData).length
+  isResultWindowActive = () => !!Object.keys(this.state.resultData).length
   closeResultWindow = () => this.setState({ resultData: {} })
 
   submitForm = async () => {

@@ -69,7 +69,7 @@ class CuriositesView extends React.Component {
           {currentText}
           <span>|</span>
         </p>
-        <Button bigger onClick={this.writeSentence}>
+        <Button onClick={this.writeSentence}>
           Nowa ciekawostka
         </Button>
       </div>
