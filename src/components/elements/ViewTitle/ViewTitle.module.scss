@@ -1,0 +1,22 @@
+@import './../../../assets/variables.scss';
+
+.viewTitle {
+  margin-bottom: 30px;
+  text-align: center;
+
+  .title {
+    color: $whiteColor;
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+    color: $whiteColor;
+  }
+}
+
+@media (max-width: $breakpoint-medium_phone) {
+  .viewTitle {
+    margin-bottom: 15px;
+  }
+}

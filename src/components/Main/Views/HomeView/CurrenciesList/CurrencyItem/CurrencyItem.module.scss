@@ -13,7 +13,6 @@
   border-bottom-right-radius: $borderRadius;
   background-color: transparent;
   cursor: pointer;
-
   z-index: 1;
   overflow: hidden;
   transition: 0.1s;
@@ -74,5 +73,12 @@
       bottom: -100px;
       background-color: rgba(0, 0, 0, 0.85);
     }
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .wrapper {
+    width: 275px;
+    margin: 0 10px 10px;
   }
 }

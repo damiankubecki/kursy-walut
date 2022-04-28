@@ -9,3 +9,9 @@
   background-size: cover;
   overflow-y: scroll;
 }
+
+@media (max-width: $breakpoint-tablet) {
+  .wrapper {
+    padding: 50px 10px;
+  }
+}

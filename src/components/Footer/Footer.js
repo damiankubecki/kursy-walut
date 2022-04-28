@@ -3,10 +3,10 @@ import styles from './Footer.module.scss'
 import ProfilesNavigation from './ProfilesNavigation/ProfilesNavigation'
 
 const Footer = () => (
-  <div className={styles.wrapper}>
+  <footer className={styles.wrapper}>
     <p className={styles.paragraph}>created &amp; designed by Damian Kubecki</p>
     <ProfilesNavigation />
-  </div>
+  </footer>
 )
 
 export default Footer

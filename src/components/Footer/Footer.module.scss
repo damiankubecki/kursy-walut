@@ -8,10 +8,18 @@
   justify-content: center;
   align-items: center;
   z-index: 1;
+
+  .paragraph {
+    padding: 0 10px;
+    font-size: 0.9rem;
+    color: $whiteColor;
+  }
 }
 
-.paragraph {
-  padding: 0 10px;
-  font-size: 0.9rem;
-  color: $whiteColor;
+@media (max-width: $breakpoint-large_phone) {
+  .wrapper {
+    .paragraph {
+      display: none;
+    }
+  }
 }

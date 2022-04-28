@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './SearchView.module.scss'
 import SearchForm from './SearchForm/SearchForm'
+import ViewTitle from '../../../elements/ViewTitle/ViewTitle'
 import SearchResultWindow from './SearchResultWindow/SearchResultWindow'
 import Data from '../../../../assets/data/fetchData'
 import { findCurrencyByCode } from '../../../../assets/functions/findCurrencyByCode'
@@ -61,7 +62,7 @@ class SearchView extends React.Component {
     const { form, resultData } = this.state
     return (
       <div className={styles.wrapper}>
-        <h2 className={styles.title}>Szukaj waluty</h2>
+        <ViewTitle title="Szukaj waluty" />
         <SearchForm
           currenciesCollection={this.currenciesCollection}
           handleCurrencyChange={this.setCurrency}

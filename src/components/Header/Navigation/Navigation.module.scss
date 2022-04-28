@@ -3,21 +3,22 @@
 .wrapper {
   display: flex;
   align-items: center;
-}
 
-.navItem {
-  padding: 0 20px;
-  font-size: 2.4rem;
-  color: $whiteColor;
-  transition: 0.1s;
-  &:hover {
-    transform: scale(1.1);
-  }
+  .navItem {
+    padding: 0 20px;
+    font-size: 2.4rem;
+    color: $whiteColor;
+    transition: 0.1s;
 
-  &Active {
-    @extend .navItem;
-    color: $goldColor;
-    animation: 0.2s setActive linear both;
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &Active {
+      @extend .navItem;
+      color: $goldColor;
+      animation: 0.2s setActive linear both;
+    }
   }
 }
 
@@ -27,5 +28,18 @@
   }
   100% {
     transform: scale(1.2) rotate(-2deg);
+  }
+}
+
+@media (max-width: $breakpoint-small_tablet) {
+  .navItem {
+    padding: 0 15px;
+  }
+}
+@media (max-width: $breakpoint-large_phone) {
+  .wrapper {
+    padding-top: 20px;
+    flex-basis: 100%;
+    justify-content: center;
   }
 }

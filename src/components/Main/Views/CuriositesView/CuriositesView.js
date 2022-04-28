@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './CuriositesView.module.scss'
+import ViewTitle from '../../../elements/ViewTitle/ViewTitle'
 import Button from './../../../elements/Button/Button'
 import { curiositesViewConfig } from './../../../../config'
 
@@ -63,7 +64,7 @@ class CuriositesView extends React.Component {
     const { currentText } = this.state
     return (
       <div className={styles.wrapper}>
-        <h2 className={styles.title}>Ciekawostki</h2>
+        <ViewTitle title="Ciekawostki" />
         <p className={styles.curiosity}>
           {currentText}
           <span>|</span>

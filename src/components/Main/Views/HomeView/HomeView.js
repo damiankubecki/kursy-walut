@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './HomeView.module.scss'
+import ViewTitle from '../../../elements/ViewTitle/ViewTitle'
 import CurrenciesList from './CurrenciesList/CurrenciesList'
 
 const HomeView = ({ currenciesData }) => {
@@ -7,8 +8,10 @@ const HomeView = ({ currenciesData }) => {
   const currenciesCollection = currenciesData.data
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.title}>Dane walut</h2>
-      <p className={styles.effectiveDate}>średnie kursy z dnia: {effectiveDate}</p>
+      <ViewTitle
+        title="Dane walut"
+        subtitle={`średnie kursy z dnia ${effectiveDate}`}
+      />
       <CurrenciesList currenciesCollection={currenciesCollection} />
     </div>
   )

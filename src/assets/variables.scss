@@ -9,6 +9,12 @@ $githubColor: #fafafa;
 $linkedInColor: #0e76a8;
 $borderRadius: 15px;
 
+$breakpoint-tablet: 1024px;
+$breakpoint-small_tablet: 768px;
+$breakpoint-large_phone: 414px;
+$breakpoint-medium_phone: 375px;
+$breakpoint-small_phone: 360px;
+
 :export {
   goldColor: $goldColor;
   goldRGBAColor: $goldRGBAColor;

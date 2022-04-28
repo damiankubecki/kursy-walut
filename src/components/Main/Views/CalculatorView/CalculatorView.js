@@ -5,6 +5,7 @@ import {
   convertResult,
   convertExchangeRate,
 } from '../../../../assets/functions/convertedValues'
+import ViewTitle from '../../../elements/ViewTitle/ViewTitle'
 import CalcForm from './CalcForm/CalcForm'
 import CalcResult from './CalcResult/CalcResult'
 import Modal from '../../../elements/Modal/Modal'
@@ -74,7 +75,7 @@ class CalculatorView extends React.Component {
     const { form, result, modal } = this.state
     return (
       <div className={styles.wrapper}>
-        <h2 className={styles.title}>Kalkulator</h2>
+        <ViewTitle title="Kalkulator" />
         <CalcForm
           currenciesCollection={[PLN, ...data]}
           setResult={this.setResult}

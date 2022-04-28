@@ -5,17 +5,51 @@
   color: $whiteColor;
   text-align: center;
 
-  .leftSection {
-    font-size: 1.6rem;
-  }
+  .amounts {
+    .leftSection {
+      font-size: 1.6rem;
+    }
 
-  .rightSection {
-    font-size: 2rem;
-    font-weight: bold;
+    .equalMark {
+      font-size: 1.6rem;
+    }
+
+    .rightSection {
+      font-size: 2rem;
+      font-weight: bold;
+    }
   }
 
   .note {
     margin-top: 5px;
     font-size: 0.9rem;
+  }
+}
+
+@media (max-width: $breakpoint-large_phone) {
+  .wrapper {
+    margin-top: 30px;
+
+    .amounts {
+      display: flex;
+      flex-direction: column;
+
+      .leftSection {
+        padding-bottom: 5px;
+      }
+
+      .equalMark {
+        display: none;
+      }
+    }
+
+    .note {
+      margin-top: 15px;
+
+      .date {
+        display: block;
+        font-size: .8rem;
+      }
+    }
   }
 }

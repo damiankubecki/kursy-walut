@@ -19,7 +19,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 550px;
-  min-height: 300px;
+  min-height: 250px;
   border-radius: 25px;
   box-shadow: 9px 9px 20px 15px $darkBlackColor;
   background-color: $darkBlackColor;
@@ -32,7 +32,7 @@
   .title {
     flex-basis: 100%;
     padding: 10px 50px 5px;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: $goldColor;
   }
 
@@ -42,17 +42,14 @@
 
     .leftSide {
       align-self: stretch;
+      display: flex;
+      align-items: center;
       flex-basis: 35%;
       border-right: 2px solid rgba($color: $whiteColor, $alpha: 0.15);
       position: relative;
       overflow: hidden;
 
       &TextContainer {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
         transform: rotate(-50deg);
         display: flex;
         justify-content: center;
@@ -60,8 +57,8 @@
       }
 
       &Text {
-        font-size: 30px;
-        color: rgba($color: $whiteColor, $alpha: 0.15);
+        font-size: 1.6rem;
+        color: rgba($color: $whiteColor, $alpha: 0.1);
         transform: translateY(20px) scale(1.5);
         user-select: none;
       }
@@ -71,7 +68,7 @@
       flex-basis: 70%;
 
       .content {
-        padding: 20px 30px;
+        padding: 10px 15px;
         font-size: 1rem;
         color: $whiteColor;
         text-align: left;
@@ -111,5 +108,53 @@
   }
   100% {
     transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@media (max-width: $breakpoint-small_tablet) {
+  .modal {
+    width: 450px;
+
+    .modalContent {
+      .leftSide {
+        &Text {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}
+@media (max-width: $breakpoint-large_phone) {
+  .modal {
+    width: 80vw;
+    min-height: 150px;
+
+    .modalContent {
+      flex-direction: column;
+
+      .leftSide {
+        order: 1;
+        display: block;
+        line-height: 35px;
+        flex-basis: 35px;
+        border: none;
+        border-top: 2px solid rgba($color: $whiteColor, $alpha: 0.15);
+
+        &TextContainer {
+          transform: rotate(-2deg);
+        }
+
+        &Text {
+          font-size: 1.1rem;
+          transform: translateY(0px) scale(1.5);
+        }
+      }
+
+      .rightSide {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+      }
+    }
   }
 }

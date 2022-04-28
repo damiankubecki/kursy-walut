@@ -8,3 +8,15 @@
   color: $goldColor;
   font-size: 2.8rem;
 }
+
+@media (max-width: $breakpoint-tablet) {
+  .title {
+    font-size: 2.4rem;
+  }
+}
+@media (max-width: $breakpoint-large_phone) {
+  .link {
+    flex-basis: 100%;
+    text-align: center;
+  }
+}

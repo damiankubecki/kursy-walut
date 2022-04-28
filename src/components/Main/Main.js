@@ -31,11 +31,11 @@ class Main extends React.Component {
   }
 
   render() {
-    const { currenciesData } = this.state
+    const { currenciesData, loading } = this.state
 
     return (
       <div className={styles.wrapper}>
-        {!this.state.loading && (
+        {!loading && (
           <Routes>
             <Route
               exact
