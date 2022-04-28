@@ -7,7 +7,7 @@ const Buttons = ({ switchFn, resetFn }) => (
     <Button noBorder margin="3px" type="button" onClick={resetFn}>
       <i className="fa-solid fa-xmark"></i>
     </Button>
-    <Button noBorder bigger margin="3px" type="button" onClick={switchFn}>
+    <Button noBorder margin="3px" type="button" onClick={switchFn}>
       <i className="fa-solid fa-right-left"></i>
     </Button>
   </div>
