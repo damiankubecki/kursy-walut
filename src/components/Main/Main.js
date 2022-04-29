@@ -13,21 +13,14 @@ class Main extends React.Component {
     loading: true,
   }
 
-  componentDidMount() {
-    data
-      .getLastRatesOfAllCurrecies()
-      .then(response => {
-        this.setState({
-          currenciesData: response,
-          loading: false,
-        })
-        setTimeout(() => {
-          this.props.closeInitScreen()
-        }, 800)
-      })
-      .catch(() => {
-        throw new Error('An error occurred in rendering main section')
-      })
+  async componentDidMount() {
+    try {
+      const currenciesData = await data.getLastRatesOfAllCurrecies()
+      this.setState({ currenciesData: currenciesData, loading: false })
+      setTimeout(() => this.props.closeInitScreen(), 800)
+    } catch (err) {
+      throw new Error('An error occurred in rendering main section')
+    }
   }
 
   render() {

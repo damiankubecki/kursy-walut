@@ -2,52 +2,34 @@ import axios from 'axios'
 import currenciesInfo from './currenciesInfo'
 
 export default class Data {
-  static getLastRatesOfAllCurrecies() {
-    return new Promise((resolve, reject) => {
-      axios
-        .get('https://api.nbp.pl/api/exchangerates/tables/a/')
-        .then(res => {
-          const response = {
-            date: res.data[0].effectiveDate,
-            data: res.data[0].rates,
-          }
-          resolve({
-            date: response.date,
-            data: response.data.map(currency => {
-              const staticInfo = currenciesInfo.find(
-                info => info.code === currency.code
-              )
-              return { category: 99, ...currency, ...staticInfo }
-            }),
-          })
-        })
-        .catch(() => {
-          reject()
-          throw new Error('Cannot fetch the data')
-        })
-    })
+  static async getLastRatesOfAllCurrecies() {
+    const apiLink = 'https://api.nbp.pl/api/exchangerates/tables/a/'
+    try {
+      const response = await axios.get(apiLink)
+      return {
+        date: response.data[0].effectiveDate,
+        data: response.data[0].rates.map(currency => {
+          const staticInfo = currenciesInfo.find(info => info.code === currency.code)
+          return { category: 99, ...currency, ...staticInfo }
+        }),
+      }
+    } catch (err) {
+      throw new Error(`Cannot fetch the data from ${apiLink}`)
+    }
   }
 
-  static getLastRatesOfCurrency(currencyCode, lastRatesNumber) {
-    return new Promise((resolve, reject) => {
-      axios
-        .get(
-          `https://api.nbp.pl/api/exchangerates/rates/a/${currencyCode}/last/${lastRatesNumber}/`
-        )
-        .then(res => {
-          resolve(
-            [...res.data.rates].map(rate => {
-              return {
-                date: rate.effectiveDate,
-                mid: rate.mid,
-              }
-            })
-          )
-        })
-        .catch(() => {
-          reject()
-          throw new Error('Cannot fetch the data')
-        })
-    })
+  static async getLastRatesOfCurrency(currencyCode, lastRatesNumber) {
+    const apiLink = `https://api.nbp.pl/api/exchangerates/rates/a/${currencyCode}/last/${lastRatesNumber}/`
+    try {
+      const response = await axios.get(apiLink)
+      return [...response.data.rates].map(rate => {
+        return {
+          date: rate.effectiveDate,
+          mid: rate.mid,
+        }
+      })
+    } catch (err) {
+      throw new Error(`Cannot fetch the data from ${apiLink}`)
+    }
   }
 }
