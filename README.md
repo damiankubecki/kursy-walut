@@ -9,8 +9,8 @@ Dzięki aplikacji uzyskasz dostęp do:
 
 <h4>Stworzone przy użyciu: </h4>
 
-:hammer: **Chart.js | axios | react-router**
+**Chart.js | axios | react-router**
 <br>
-:bulb:  **SASS | JavaScript | React**
+**SASS | JavaScript | React**
 
 [Kursy walut online]: <https://kursywalutonline.netlify.app/>
