@@ -9,7 +9,7 @@ Dzięki aplikacji uzyskasz dostęp do:
 
 <h4>Stworzone przy użyciu: </h4>
 
-:wrench: **Chart.js | axios | react-router**
+:hammer: **Chart.js | axios | react-router**
 <br>
 :bulb:  **SASS | JavaScript | React**
 
