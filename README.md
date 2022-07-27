@@ -8,6 +8,7 @@ Dzięki aplikacji uzyskasz dostęp do:
 - ciekawostek walutowych
 
 <h4>Stworzone przy użyciu: </h4>
+
 :wrench: **Chart.js | axios | react-router**
 <br>
 :bulb:  **SASS | JavaScript | React**
