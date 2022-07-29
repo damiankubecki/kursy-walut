@@ -7,7 +7,7 @@ Dzięki aplikacji uzyskasz dostęp do:
 - kalkulatora kursów wymiany walut
 - ciekawostek walutowych
 
-:bulb: **Chart.js | axios | SASS | JavaScript | React | react-router**
+:bulb: **chart.js | axios | SCSS | JavaScript | React | react-router**
 
 [Kursy walut online]: <https://kursywalutonline.netlify.app/>
 
