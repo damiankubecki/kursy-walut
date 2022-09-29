@@ -11,7 +11,7 @@ import {
   Legend,
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
-import variables from 'assets/variables.scss'
+import variables from 'theme/variables.scss'
 
 const { goldColor, goldRGBAColor } = variables
 

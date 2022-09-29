@@ -1,29 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import InitialScreen from 'app/InitialScreen/InitialScreen';
 import Header from 'app/Header/Header';
 import Main from 'app/Main/Main';
-import Footer from 'app/Footer/Footer';
 
-class App extends React.Component {
-  state = {
-    isInitScreenActive: true,
-  };
-  closeInitScreen = () => this.setState({ isInitScreenActive: false });
+const App = () => {
+  const [isInitScreenActive, setInitScreenActivity] = useState(true);
 
-  render() {
-    const { isInitScreenActive } = this.state;
-    return (
-      <BrowserRouter>
-        {isInitScreenActive && <InitialScreen />}
-        <div className="App">
-          <Header />
-          <Main closeInitScreen={this.closeInitScreen} />
-          <Footer />
-        </div>
-      </BrowserRouter>
-    );
-  }
-}
+  const closeInitScreen = () => setInitScreenActivity(false);
+
+  return (
+    <BrowserRouter>
+      {isInitScreenActive && <InitialScreen />}
+      <div className="App">
+        <Header />
+        <Main closeInitScreen={closeInitScreen} />
+      </div>
+    </BrowserRouter>
+  );
+};
 
 export default App;

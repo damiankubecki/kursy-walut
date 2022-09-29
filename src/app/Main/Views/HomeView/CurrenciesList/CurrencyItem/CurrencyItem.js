@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './CurrencyItem.module.scss';
-import variables from 'assets/variables.scss';
+import variables from 'theme/variables.scss';
 import Modal from 'components/Modal/Modal';
 
 const { darkBlackColor } = variables;

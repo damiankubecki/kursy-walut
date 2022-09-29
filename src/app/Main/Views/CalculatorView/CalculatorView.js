@@ -4,7 +4,7 @@ import {
   convertSum,
   convertResult,
   convertExchangeRate,
-} from 'assets/functions/convertedValues';
+} from 'functions/convertedValues';
 import ViewTitle from 'components/ViewTitle/ViewTitle';
 import CalcForm from './CalcForm/CalcForm';
 import CalcResult from './CalcResult/CalcResult';

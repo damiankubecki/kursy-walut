@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './SearchView.module.scss';
 import SearchForm from './SearchForm/SearchForm';
 import ViewTitle from 'components/ViewTitle/ViewTitle';
 import SearchResultWindow from './SearchResultWindow/SearchResultWindow';
-import Data from 'assets/data/fetchData';
-import { findCurrencyByCode } from 'assets/functions/findCurrencyByCode';
+import Data from 'data/fetchData';
+import { findCurrencyByCode } from 'functions/findCurrencyByCode';
 import { searchViewConfig } from 'config';
 
 const { initialCurrencyCode, initialRatesNumber } = searchViewConfig;
@@ -14,19 +14,14 @@ class SearchView extends React.Component {
 
   state = {
     form: {
-      selectedCurrency: findCurrencyByCode(
-        this.currenciesCollection,
-        initialCurrencyCode
-      ),
+      selectedCurrency: findCurrencyByCode(this.currenciesCollection, initialCurrencyCode),
       ratesNumber: initialRatesNumber,
     },
     resultData: {},
   };
 
   setCurrency = currencyCode => {
-    const currency = this.currenciesCollection.find(
-      currency => currency.code === currencyCode
-    );
+    const currency = this.currenciesCollection.find(currency => currency.code === currencyCode);
     this.setState(prevState => {
       return { form: { ...prevState.form, selectedCurrency: currency } };
     });
@@ -39,10 +34,7 @@ class SearchView extends React.Component {
   };
 
   setResultData = async (currency, ratesNumber) => {
-    const lastCurrencyRates = await Data.getLastRatesOfCurrency(
-      currency.code,
-      ratesNumber
-    );
+    const lastCurrencyRates = await Data.getLastRatesOfCurrency(currency.code, ratesNumber);
     this.setState({ resultData: { ...currency, rates: lastCurrencyRates } });
   };
 
@@ -70,15 +62,9 @@ class SearchView extends React.Component {
           submitForm={this.submitForm}
           {...form}
         />
-        {this.isResultWindowActive() && (
-          <SearchResultWindow
-            closeWindowFn={this.closeResultWindow}
-            {...resultData}
-          />
-        )}
+        {this.isResultWindowActive() && <SearchResultWindow closeWindowFn={this.closeResultWindow} {...resultData} />}
       </div>
     );
   }
 }
-
 export default SearchView;
