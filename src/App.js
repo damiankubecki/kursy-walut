@@ -1,18 +1,18 @@
-import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import InitialScreen from './components/InitialScreen/InitialScreen'
-import Header from './components/Header/Header'
-import Main from './components/Main/Main'
-import Footer from './components/Footer/Footer'
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import InitialScreen from 'app/InitialScreen/InitialScreen';
+import Header from 'app/Header/Header';
+import Main from 'app/Main/Main';
+import Footer from 'app/Footer/Footer';
 
 class App extends React.Component {
   state = {
     isInitScreenActive: true,
-  }
-  closeInitScreen = () => this.setState({ isInitScreenActive: false })
+  };
+  closeInitScreen = () => this.setState({ isInitScreenActive: false });
 
   render() {
-    const { isInitScreenActive } = this.state
+    const { isInitScreenActive } = this.state;
     return (
       <BrowserRouter>
         {isInitScreenActive && <InitialScreen />}
@@ -22,8 +22,8 @@ class App extends React.Component {
           <Footer />
         </div>
       </BrowserRouter>
-    )
+    );
   }
 }
 
-export default App
+export default App;

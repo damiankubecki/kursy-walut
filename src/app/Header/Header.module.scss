@@ -1,0 +1,22 @@
+@import './../../assets/variables.scss';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 70px 10px 50px;
+  background-color: $darkBlackColor;
+  box-shadow: 0px 5px 25px 3px $goldColor;
+  z-index: 2;
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .header {
+    padding: 15px 25px 10px;
+  }
+}
+@media (max-width: $breakpoint-large_phone) {
+  .header {
+    padding: 15px 15px 5px;
+    flex-wrap: wrap;
+  }
+}

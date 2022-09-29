@@ -1,0 +1,25 @@
+@import 'assets/variables.scss';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+
+  .currenciesList {
+    padding: 0 10px;
+    text-align: center;
+    color: $whiteColor;
+    font-size: 1.4rem;
+
+    p {
+      margin: 5px 0;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-large_phone) {
+  .wrapper {
+    flex-direction: column;
+    margin-bottom: 25px;
+  }
+}
