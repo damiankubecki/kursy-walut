@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import data from 'data/fetchData';
 import styles from './Main.module.scss';
-import HomeView from './Views/HomeView/HomeView';
-import SearchView from './Views/SearchView/SearchView';
-import CalculatorView from './Views/CalculatorView/CalculatorView';
-import CuriositesView from './Views/CuriositesView/CuriositesView';
+import HomeView from 'views/HomeView/HomeView';
+import SearchView from 'views/SearchView/SearchView';
+import CalculatorView from 'views/CalculatorView/CalculatorView';
+import CuriositesView from 'views/CuriositesView/CuriositesView';
 
 const Main = ({ closeInitScreen }) => {
   const [currenciesData, setCurrenciesData] = useState({});
@@ -16,10 +16,12 @@ const Main = ({ closeInitScreen }) => {
       try {
         const response = await data.getLastRatesOfAllCurrecies();
         setCurrenciesData(response);
-        setLoading(false);
-        setTimeout(() => closeInitScreen(), 800);
+        setTimeout(() => {
+          setLoading(false);
+          closeInitScreen();
+        }, 800);
       } catch (err) {
-        throw new Error('An error occurred in rendering main section');
+        throw new Error('An error occurred during main section render', err);
       }
     };
 
