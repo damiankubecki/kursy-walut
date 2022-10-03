@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styles from './CalcForm.module.scss';
 import { calculateResult } from './functions/calculateResult';
 import ChooseCurrenciesSection from './ChooseCurrenciesSection/ChooseCurrenciesSection';

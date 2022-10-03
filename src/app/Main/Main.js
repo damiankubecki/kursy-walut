@@ -26,7 +26,7 @@ const Main = ({ closeInitScreen }) => {
     };
 
     fetchCurrenciesData();
-  }, []);
+  });
 
   return (
     <div className={styles.wrapper}>
