@@ -6,16 +6,17 @@
 
   .title {
     color: $whiteColor;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    font-weight: 400;
   }
 
   .subtitle {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: $whiteColor;
   }
 }
 
-@media (max-width: $breakpoint-medium_phone) {
+@media (max-width: $breakpoint-large_phone) {
   .viewTitle {
     margin-bottom: 15px;
   }

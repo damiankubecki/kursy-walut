@@ -3,22 +3,22 @@
 .btn {
   border: none;
   border-bottom: 2px solid $goldColor;
-  border-radius: $borderRadius;
-  padding: 3px 20px 3px 15px;
+  padding: 5px 15px;
   text-decoration: none;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: $goldColor;
-  background-color: $darkBlackColor;
+  background-color: transparent;
   cursor: pointer;
   transition: 0.1s;
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1);
+    opacity: 0.8;
   }
 }
 
 @media (max-width: $breakpoint-large_phone) {
   .btn {
-    font-size: 1.6rem;
+    font-size: 1.1rem;
   }
 }

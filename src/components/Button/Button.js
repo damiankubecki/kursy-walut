@@ -1,8 +1,9 @@
-import React from 'react'
-import styles from './Button.module.scss'
+import React from 'react';
+import styles from './Button.module.scss';
 
 const Button = ({ href, noBorder, margin, children, ...props }) => {
-  const border = noBorder ? 'none' : '2px solid'
+  const border = noBorder ? 'none' : '2px solid';
+
   return (
     <>
       {href ? (
@@ -30,6 +31,6 @@ const Button = ({ href, noBorder, margin, children, ...props }) => {
         </button>
       )}
     </>
-  )
-}
-export default Button
+  );
+};
+export default Button;

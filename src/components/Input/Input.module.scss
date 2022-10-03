@@ -9,7 +9,7 @@
     padding: 5px 0;
     text-align: center;
     color: $whiteColor;
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 
   .inputContainer {
@@ -21,10 +21,10 @@
       padding: 5px 10px 2px;
       border: none;
       border-bottom: 2px solid $goldColor;
-      border-radius: 10px;
+      border-radius: 5px;
       background-color: $lightBlackColor;
       color: $whiteColor;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       text-align: right;
 
       &:focus {
@@ -63,8 +63,8 @@
   .wrapper {
     .inputContainer {
       .input {
-        font-size: 1.5rem;
-        padding: 5px 20px 2px;
+        font-size: 1.3rem;
+        padding: 6px 15px 2px;
       }
     }
   }
