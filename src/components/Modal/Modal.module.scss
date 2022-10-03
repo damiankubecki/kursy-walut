@@ -127,9 +127,13 @@
 }
 @media (max-width: $breakpoint-large_phone) {
   .modal {
-    width: 80vw;
+    width: 90vw;
     min-height: 125px;
     box-shadow: 2px 2px 4px 0px $goldColor;
+
+    .title {
+      font-size: 1.3rem;
+    }
 
     .modalContent {
       flex-direction: column;
